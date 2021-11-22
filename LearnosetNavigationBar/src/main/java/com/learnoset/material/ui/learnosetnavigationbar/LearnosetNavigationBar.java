@@ -13,21 +13,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class LearnosetNavigationBar extends NavigationView {
 
     private final Context context;
+    private final List<LearnosetNavItems> learnosetNavItems = new ArrayList<>();
     private boolean darkModeEnabled = false;
     private ImageView headerImage;
     private TextView profileName;
+    private NavigationAdapter navigationAdapter;
+    private boolean initialized = false;
 
     public LearnosetNavigationBar(@NonNull Context context) {
         super(context);
@@ -84,6 +91,21 @@ public class LearnosetNavigationBar extends NavigationView {
 
     }
 
+    public void addItem(LearnosetNavItems learnosetNavItem) {
+        learnosetNavItems.add(learnosetNavItem);
+        navigationAdapter.notifyDataSetChanged();
+    }
+
+    public void addItems(List<LearnosetNavItems> learnosetNavItem) {
+        learnosetNavItems.addAll(learnosetNavItem);
+        navigationAdapter.notifyDataSetChanged();
+    }
+
+    public void removeItem(int itemPosition) {
+        learnosetNavItems.remove(itemPosition);
+        navigationAdapter.notifyDataSetChanged();
+    }
+
     @SuppressLint("InflateParams")
     private void init() {
 
@@ -91,10 +113,22 @@ public class LearnosetNavigationBar extends NavigationView {
         View headerView = layoutInflater.inflate(R.layout.nav_header, null);
         addHeaderView(headerView);
 
+        View bodyView = layoutInflater.inflate(R.layout.nav_header, null);
+        addView(bodyView);
+
         profileName = headerView.findViewById(R.id.headerProfileName);
         headerImage = headerView.findViewById(R.id.headerImageView);
+
         final TextView wishMessage = headerView.findViewById(R.id.headerWishMessage);
         wishMessage.setText(generateWishMessage());
+
+        final RecyclerView navItemsRecyclerView = bodyView.findViewById(R.id.navItemsRecyclerView);
+        navItemsRecyclerView.setHasFixedSize(true);
+        navItemsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        navigationAdapter = new NavigationAdapter(learnosetNavItems, context);
+
+        initialized = true;
     }
 
     private String generateWishMessage() {
