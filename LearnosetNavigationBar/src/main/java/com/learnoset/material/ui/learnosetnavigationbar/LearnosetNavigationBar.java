@@ -29,7 +29,9 @@ import java.util.Locale;
 public class LearnosetNavigationBar extends NavigationView {
 
     private final Context context;
+
     private final List<LearnosetNavItems> learnosetNavItems = new ArrayList<>();
+
     private boolean darkModeEnabled = false;
     private ImageView headerImage;
     private TextView profileName;
@@ -46,12 +48,12 @@ public class LearnosetNavigationBar extends NavigationView {
         darkModeEnabled = isDarkModeEnabled;
     }
 
-    public void initializeHeader(String profileImageUrl, String profileNameTxt) {
+    public void setHeaderData(String profileImageUrl, String profileNameTxt) {
         Picasso.get().load(profileImageUrl).into(headerImage);
         profileName.setText(profileNameTxt);
     }
 
-    public void initializeHeader(File profileImageFile, String profileNameTxt) throws LearnosetExceptions {
+    public void setHeaderData(File profileImageFile, String profileNameTxt) throws LearnosetExceptions {
         profileName.setText(profileNameTxt);
 
         if (profileImageFile.exists()) {
@@ -65,7 +67,7 @@ public class LearnosetNavigationBar extends NavigationView {
         }
     }
 
-    public void initializeHeader(Uri profileImageUri, String profileNameTxt) throws LearnosetExceptions {
+    public void setHeaderData(Uri profileImageUri, String profileNameTxt) throws LearnosetExceptions {
         profileName.setText(profileNameTxt);
 
         final ContentResolver contentResolver = context.getContentResolver();
@@ -101,6 +103,11 @@ public class LearnosetNavigationBar extends NavigationView {
         navigationAdapter.notifyDataSetChanged();
     }
 
+    public void addItemsGroup(NavItemsGroup navItemsGroup) {
+        learnosetNavItems.addAll(navItemsGroup.getLearnosetNavItems());
+        navigationAdapter.notifyDataSetChanged();
+    }
+
     public void removeItem(int itemPosition) {
         learnosetNavItems.remove(itemPosition);
         navigationAdapter.notifyDataSetChanged();
@@ -126,7 +133,7 @@ public class LearnosetNavigationBar extends NavigationView {
         navItemsRecyclerView.setHasFixedSize(true);
         navItemsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        navigationAdapter = new NavigationAdapter(learnosetNavItems, context);
+        navigationAdapter = new NavigationAdapter(context, learnosetNavItems);
 
         initialized = true;
     }

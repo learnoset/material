@@ -14,7 +14,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     private final List<LearnosetNavItems> learnosetNavItems;
     private final Context context;
 
-    public NavigationAdapter(List<LearnosetNavItems> learnosetNavItems, Context context) {
+    public NavigationAdapter(Context context, List<LearnosetNavItems> learnosetNavItems) {
         this.learnosetNavItems = learnosetNavItems;
         this.context = context;
     }
