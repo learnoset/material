@@ -10,6 +10,7 @@
         android:padding="20dp">
 
         <ImageView
+            android:id="@+id/headerImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:adjustViewBounds="true"
@@ -23,14 +24,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/wishMessage"
+                android:id="@+id/headerWishMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Good Evening"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/profileName"
+                android:id="@+id/headerProfileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
