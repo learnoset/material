@@ -28,15 +28,15 @@ import java.util.Locale;
 
 public class LearnosetNavigationBar extends NavigationView {
 
+    public static int GROUPS_COUNT = 0;
     private final Context context;
-
     private final List<LearnosetNavItems> learnosetNavItems = new ArrayList<>();
-
     private boolean darkModeEnabled = false;
     private ImageView headerImage;
     private TextView profileName;
     private NavigationAdapter navigationAdapter;
     private boolean initialized = false;
+    private NavThemes selectedTheme = NavThemes.LIGHT;
 
     public LearnosetNavigationBar(@NonNull Context context) {
         super(context);
@@ -44,8 +44,8 @@ public class LearnosetNavigationBar extends NavigationView {
         init();
     }
 
-    public void enableDarkMode(boolean isDarkModeEnabled) {
-        darkModeEnabled = isDarkModeEnabled;
+    public void setNavigationTheme(NavThemes theme) {
+        this.selectedTheme = theme;
     }
 
     public void setHeaderData(String profileImageUrl, String profileNameTxt) {
@@ -104,7 +104,14 @@ public class LearnosetNavigationBar extends NavigationView {
     }
 
     public void addItemsGroup(NavItemsGroup navItemsGroup) {
-        learnosetNavItems.addAll(navItemsGroup.getLearnosetNavItems());
+
+        int getGroupId = navItemsGroup.GROUP_ID;
+
+        for (int i = 0; i < navItemsGroup.getLearnosetNavItems().size(); i++) {
+            LearnosetNavItems learnosetNavItem = navItemsGroup.getLearnosetNavItems().get(i);
+            learnosetNavItem.groupId = getGroupId;
+            learnosetNavItems.add(learnosetNavItem);
+        }
         navigationAdapter.notifyDataSetChanged();
     }
 
@@ -150,5 +157,10 @@ public class LearnosetNavigationBar extends NavigationView {
             return "Good Evening";
         }
 
+    }
+
+    public enum NavThemes {
+        LIGHT,
+        DARK
     }
 }

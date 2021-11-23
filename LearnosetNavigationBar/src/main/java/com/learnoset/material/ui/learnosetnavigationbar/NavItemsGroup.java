@@ -7,15 +7,22 @@ public class NavItemsGroup {
 
     private String groupName;
     private List<LearnosetNavItems> learnosetNavItems = null;
+    public int GROUP_ID = 0;
 
     public NavItemsGroup(String groupName) {
         learnosetNavItems = new ArrayList<>();
         this.groupName = groupName;
+        
+        LearnosetNavigationBar.GROUPS_COUNT++;
+        GROUP_ID = LearnosetNavigationBar.GROUPS_COUNT;
     }
 
     public NavItemsGroup(List<LearnosetNavItems> learnosetNavItems, String groupName) {
         this.learnosetNavItems = learnosetNavItems;
         this.groupName = groupName;
+
+        LearnosetNavigationBar.GROUPS_COUNT++;
+        GROUP_ID = LearnosetNavigationBar.GROUPS_COUNT;
     }
 
     public NavItemsGroup(LearnosetNavItems learnosetNavItem, String groupName) {
@@ -24,6 +31,9 @@ public class NavItemsGroup {
         }
         this.learnosetNavItems.add(learnosetNavItem);
         this.groupName = groupName;
+
+        LearnosetNavigationBar.GROUPS_COUNT++;
+        GROUP_ID = LearnosetNavigationBar.GROUPS_COUNT;
     }
 
     public void addItem(LearnosetNavItems learnosetNavItem) {

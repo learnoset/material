@@ -4,12 +4,11 @@ public class LearnosetNavItems {
 
     private int itemIcon = R.drawable.error_icon;
     private String itemName = "";
-    public String type = "single";
     private NavItemsGroup navItemsGroup;
-    private int groupId = 0;
+    public int groupId = -1;
 
     public LearnosetNavItems() {
-
+        this.groupId = -1;
     }
 
     public void addItem(BuiltInItems builtInItems) {
@@ -21,7 +20,6 @@ public class LearnosetNavItems {
     }
 
     public void addItem(String itemTitle, int itemIcon) {
-        type = "single";
         this.itemIcon = itemIcon;
         this.itemName = itemTitle;
 
