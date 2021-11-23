@@ -2,10 +2,10 @@ package com.learnoset.material.ui.learnosetnavigationbar;
 
 public class LearnosetNavItems {
 
+    protected int groupId = -1;
     private int itemIcon = R.drawable.error_icon;
     private String itemName = "";
     private NavItemsGroup navItemsGroup;
-    public int groupId = -1;
 
     public LearnosetNavItems() {
         this.groupId = -1;
@@ -19,10 +19,18 @@ public class LearnosetNavItems {
         }
     }
 
-    public void addItem(String itemTitle, int itemIcon) {
+    public void addItem(String itemTitle, int itemResIconId) {
         this.itemIcon = itemIcon;
         this.itemName = itemTitle;
 
+    }
+
+    public String getTitle() {
+        return itemName;
+    }
+
+    public int getIcon() {
+        return itemIcon;
     }
 
     public enum BuiltInItems {

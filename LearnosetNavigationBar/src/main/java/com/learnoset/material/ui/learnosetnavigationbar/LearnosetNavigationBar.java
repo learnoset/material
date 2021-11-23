@@ -31,6 +31,7 @@ public class LearnosetNavigationBar extends NavigationView {
     public static int GROUPS_COUNT = 0;
     private final Context context;
     private final List<LearnosetNavItems> learnosetNavItems = new ArrayList<>();
+    private final List<NavItemsGroup> navItemsGroups = new ArrayList<>();
     private boolean darkModeEnabled = false;
     private ImageView headerImage;
     private TextView profileName;
@@ -104,14 +105,8 @@ public class LearnosetNavigationBar extends NavigationView {
     }
 
     public void addItemsGroup(NavItemsGroup navItemsGroup) {
-
-        int getGroupId = navItemsGroup.GROUP_ID;
-
-        for (int i = 0; i < navItemsGroup.getLearnosetNavItems().size(); i++) {
-            LearnosetNavItems learnosetNavItem = navItemsGroup.getLearnosetNavItems().get(i);
-            learnosetNavItem.groupId = getGroupId;
-            learnosetNavItems.add(learnosetNavItem);
-        }
+        navItemsGroups.add(navItemsGroup);
+        learnosetNavItems.addAll(navItemsGroup.getLearnosetNavItems());
         navigationAdapter.notifyDataSetChanged();
     }
 
@@ -140,7 +135,7 @@ public class LearnosetNavigationBar extends NavigationView {
         navItemsRecyclerView.setHasFixedSize(true);
         navItemsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        navigationAdapter = new NavigationAdapter(context, learnosetNavItems);
+        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups);
 
         initialized = true;
     }
