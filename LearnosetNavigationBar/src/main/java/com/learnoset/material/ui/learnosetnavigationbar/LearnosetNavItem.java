@@ -1,28 +1,22 @@
 package com.learnoset.material.ui.learnosetnavigationbar;
 
-public class LearnosetNavItems {
+public class LearnosetNavItem {
 
-    protected int groupId = -1;
+    protected int groupId;
     private int itemIcon = R.drawable.error_icon;
     private String itemName = "";
     private NavItemsGroup navItemsGroup;
 
-    public LearnosetNavItems() {
+    public LearnosetNavItem() {
         this.groupId = -1;
     }
 
-    public void addItem(BuiltInItems builtInItems) {
-        if (builtInItems == BuiltInItems.DASHBOARD) {
-
-        } else if (builtInItems == BuiltInItems.HOME) {
-
-        }
+    public void setTitle(String itemTitle){
+        this.itemName = itemTitle;
     }
 
-    public void addItem(String itemTitle, int itemResIconId) {
+    public void setIcon(int itemResIconId){
         this.itemIcon = itemIcon;
-        this.itemName = itemTitle;
-
     }
 
     public String getTitle() {

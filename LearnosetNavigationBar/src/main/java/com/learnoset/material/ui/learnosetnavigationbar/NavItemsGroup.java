@@ -3,58 +3,49 @@ package com.learnoset.material.ui.learnosetnavigationbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavItemsGroup extends LearnosetNavItems {
+public class NavItemsGroup {
 
-    public int GROUP_ID = 0;
+    public int id;
     private final String groupName;
-    private List<LearnosetNavItems> learnosetNavItems = null;
+    private final List<LearnosetNavItem> learnosetNavItems;
 
     public NavItemsGroup(String groupName) {
         learnosetNavItems = new ArrayList<>();
         this.groupName = groupName;
 
         LearnosetNavigationBar.GROUPS_COUNT++;
-        GROUP_ID = LearnosetNavigationBar.GROUPS_COUNT;
+        id = LearnosetNavigationBar.GROUPS_COUNT;
     }
 
-    public NavItemsGroup(List<LearnosetNavItems> learnosetNavItems, String groupName) {
-        this.learnosetNavItems = learnosetNavItems;
-        this.groupName = groupName;
-
-        LearnosetNavigationBar.GROUPS_COUNT++;
-        GROUP_ID = LearnosetNavigationBar.GROUPS_COUNT;
-    }
-
-    public NavItemsGroup(LearnosetNavItems learnosetNavItem, String groupName) {
-        if (learnosetNavItems == null) {
-            learnosetNavItems = new ArrayList<>();
-        }
-        this.learnosetNavItems.add(learnosetNavItem);
-        this.groupName = groupName;
-
-        LearnosetNavigationBar.GROUPS_COUNT++;
-        GROUP_ID = LearnosetNavigationBar.GROUPS_COUNT;
-    }
-
-    public void addItem(LearnosetNavItems learnosetNavItem) {
-        groupId = GROUP_ID;
+    public void addGroupItem(LearnosetNavItem learnosetNavItem) {
+        learnosetNavItem.groupId = id;
         learnosetNavItems.add(learnosetNavItem);
     }
 
-    public void addItems(List<LearnosetNavItems> learnosetNavItemss) {
+    public void addGroupItems(List<LearnosetNavItem> learnosetNavItemss) {
         for (int i = 0; i < learnosetNavItemss.size(); i++) {
-            LearnosetNavItems learnosetNavItem = learnosetNavItemss.get(i);
-            groupId = GROUP_ID;
+            LearnosetNavItem learnosetNavItem = learnosetNavItemss.get(i);
+            learnosetNavItem.groupId = id;
             learnosetNavItems.add(learnosetNavItem);
         }
     }
 
-    public List<LearnosetNavItems> getLearnosetNavItems() {
-        return learnosetNavItems;
+    public void addGroupItem(LearnosetNavItem.BuiltInItems builtInItems) {
+
+        LearnosetNavItem learnosetNavItem = new LearnosetNavItem();
+        learnosetNavItem.groupId = id;
+
+        if (builtInItems == LearnosetNavItem.BuiltInItems.DASHBOARD) {
+            learnosetNavItem.setTitle("Dashboard");
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.HOME) {
+            learnosetNavItem.setTitle("Home");
+        }
+
+        learnosetNavItems.add(learnosetNavItem);
     }
 
-    public void setLearnosetNavItems(List<LearnosetNavItems> learnosetNavItems) {
-        this.learnosetNavItems = learnosetNavItems;
+    public List<LearnosetNavItem> getGroupItems() {
+        return learnosetNavItems;
     }
 
     public String getGroupName(){
