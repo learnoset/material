@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,10 +38,16 @@ public class LearnosetNavigationBar extends NavigationView {
     private TextView profileName;
     private NavigationAdapter navigationAdapter;
     private NavThemes selectedTheme = NavThemes.LIGHT;
-    private IconColors selectedIconColor = IconColors.DEFAULT;
+    private final IconColors selectedIconColor = IconColors.DEFAULT;
 
     public LearnosetNavigationBar(@NonNull Context context) {
         super(context);
+        this.context = context;
+        init();
+    }
+
+    public LearnosetNavigationBar(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
         this.context = context;
         init();
     }
