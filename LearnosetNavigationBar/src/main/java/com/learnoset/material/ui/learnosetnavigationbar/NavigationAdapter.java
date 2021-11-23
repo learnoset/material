@@ -87,7 +87,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
         holder.navItemTitle.setText(learnosetNavItem.getTitle());
         holder.navItemIcon.setImageResource(learnosetNavItem.getIcon());
-        
+
         DrawableCompat.setTint(holder.navItemIcon.getDrawable(), Color.parseColor(iconColorCode));
 
         if (groupId != learnosetNavItem.groupId) {
