@@ -97,6 +97,9 @@ learnosetNavigationBar.addNavItem(LearnosetNavItem.BuiltInItems.HOME);
 learnosetNavigationBar.addNavItem(LearnosetNavItem.BuiltInItems.DASHBOARD);
 learnosetNavigationBar.addNavItem(LearnosetNavItem.BuiltInItems.SETTINGS);
 
+// setting Drawer Layout with Drawer Gravity. If LEFT then Navigation Bar opens from Left Side. If RIGHT then opens from right Side
+learnosetNavigationBar.setDrawerLayout(drawerLayout, LearnosetNavigationBar.DrawerGravity.LEFT);
+        
 // open drawer on button click
 openNavigationBtn.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -197,6 +200,13 @@ try {
 
 // setting header profile name and profile image (from URL)
 learnosetNavigationBar.setHeaderData("John Corner", "url of image");
+```
+
+<br>
+
+11. Hide Log Out Button
+```java
+learnosetNavigationBar.enableLogOutBtn(false);
 ```
 
 <br>
