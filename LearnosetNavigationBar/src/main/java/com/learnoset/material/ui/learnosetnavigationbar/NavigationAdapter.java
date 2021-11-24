@@ -14,10 +14,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.MyViewHolder> {
@@ -28,12 +31,13 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     private final NavigationEventListener navigationEventListener;
     private String iconColorCode;
     private String selectedItemBackgroundColor;
-    private int groupId = -1;
+    private List<Integer> groupIds = new ArrayList<>();
     private LearnosetNavigationBar.NavColors selectedIconColor;
     private LearnosetNavigationBar.NavThemes selectedNavTheme;
     private LearnosetNavigationBar.NavColors selectedItemBackground;
+    private DrawerLayout drawerLayout;
 
-    public NavigationAdapter(Context context, List<LearnosetNavItem> learnosetNavItems, List<NavItemsGroup> navItemsGroups, LearnosetNavigationBar.NavColors selectedIconColor, LearnosetNavigationBar.NavThemes selectedNavTheme, LearnosetNavigationBar.NavColors selectedItemBackground, NavigationEventListener navigationEventListener) {
+    public NavigationAdapter(Context context, List<LearnosetNavItem> learnosetNavItems, List<NavItemsGroup> navItemsGroups, LearnosetNavigationBar.NavColors selectedIconColor, LearnosetNavigationBar.NavThemes selectedNavTheme, LearnosetNavigationBar.NavColors selectedItemBackground, NavigationEventListener navigationEventListener, DrawerLayout drawerLayout) {
 
         this.selectedIconColor = selectedIconColor;
         this.selectedNavTheme = selectedNavTheme;
@@ -42,7 +46,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         this.navItemsGroups = navItemsGroups;
         this.context = context;
         this.navigationEventListener = navigationEventListener;
-
+        this.drawerLayout = drawerLayout;
         gettingSelectedThemeDetails();
     }
 
@@ -147,9 +151,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
         }
 
-        if (groupId < learnosetNavItem.groupId) {
-
-            groupId = learnosetNavItem.groupId;
+        if (learnosetNavItem.groupId != -1 && !checkGroupAdded(learnosetNavItem.groupId)) {
+            groupIds.add(learnosetNavItem.groupId);
             holder.groupName.setText(getGroupName(learnosetNavItem.groupId));
             holder.groupName.setVisibility(View.VISIBLE);
 
@@ -172,6 +175,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
                 navigationEventListener.onItemSelected(position, learnosetNavItem);
             }
 
+            drawerLayout.closeDrawer(LearnosetNavigationBar.drawerGravity);
+
             if (learnosetNavItem.getFragment() != null) {
                 FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
                 fragmentManager.beginTransaction()
@@ -184,13 +189,25 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
     }
 
+    private boolean checkGroupAdded(int groupId) {
+
+        boolean isGroupAdded = false;
+        for (int i = 0; i < groupIds.size(); i++) {
+            if (groupIds.get(i) == groupId) {
+                isGroupAdded = true;
+                break;
+            }
+        }
+        return isGroupAdded;
+    }
+
     public void reloadNavigationBar(LearnosetNavigationBar.NavColors selectedIconColor, LearnosetNavigationBar.NavThemes selectedNavTheme, LearnosetNavigationBar.NavColors selectedItemBackground) {
         this.selectedIconColor = selectedIconColor;
         this.selectedNavTheme = selectedNavTheme;
         this.selectedItemBackground = selectedItemBackground;
 
         gettingSelectedThemeDetails();
-        groupId = -1;
+        groupIds.clear();
         notifyDataSetChanged();
     }
 

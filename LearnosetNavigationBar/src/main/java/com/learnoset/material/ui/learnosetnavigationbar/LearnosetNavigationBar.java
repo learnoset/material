@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +37,7 @@ public class LearnosetNavigationBar extends NavigationView {
 
     public static int GROUPS_COUNT = 0;
     public static int selectedItemPosition = 0;
+    public static int drawerGravity;
     private final Context context;
     private final List<LearnosetNavItem> learnosetNavItems = new ArrayList<>();
     private final List<NavItemsGroup> navItemsGroups = new ArrayList<>();
@@ -63,12 +66,20 @@ public class LearnosetNavigationBar extends NavigationView {
         init();
     }
 
-    public void setSelected(int navItemPosition){
+    public void setSelected(int navItemPosition) {
 
         learnosetNavItems.get(LearnosetNavigationBar.selectedItemPosition).setSelected(false);
         learnosetNavItems.get(navItemPosition).setSelected(true);
 
         navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+    }
+
+    public void setDrawerGravity(DrawerGravity drawerGravity) {
+        if (drawerGravity == DrawerGravity.LEFT) {
+            LearnosetNavigationBar.drawerGravity = GravityCompat.START;
+        } else {
+            LearnosetNavigationBar.drawerGravity = GravityCompat.END;
+        }
     }
 
     public void setTheme(NavThemes theme) {
@@ -91,12 +102,12 @@ public class LearnosetNavigationBar extends NavigationView {
         this.navigationEventListener = navigationEventListener;
     }
 
-    public void setIconsColor(NavColors iconsColor){
+    public void setIconsColor(NavColors iconsColor) {
         this.selectedIconColor = iconsColor;
         navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
-    public void setSelectedItemBackground(NavColors selectedItemBackgroundColor){
+    public void setSelectedItemBackground(NavColors selectedItemBackgroundColor) {
         this.selectedItemBackground = selectedItemBackgroundColor;
         navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
@@ -314,7 +325,7 @@ public class LearnosetNavigationBar extends NavigationView {
         navItemsRecyclerView.setHasFixedSize(true);
         navItemsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, selectedIconColor, selectedTheme, selectedItemBackground, navigationEventListener);
+        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, selectedIconColor, selectedTheme, selectedItemBackground, navigationEventListener, (DrawerLayout) getRootView());
         navItemsRecyclerView.setAdapter(navigationAdapter);
 
         navigationEventListener = null;
@@ -354,6 +365,11 @@ public class LearnosetNavigationBar extends NavigationView {
         BLUE,
         LIGHT_BLUE,
         DARK_BLUE
+    }
+
+    public enum DrawerGravity {
+        LEFT,
+        RIGHT
     }
 
     public enum NavThemes {
