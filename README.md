@@ -97,6 +97,9 @@ learnosetNavigationBar.addNavItem(LearnosetNavItem.BuiltInItems.HOME);
 learnosetNavigationBar.addNavItem(LearnosetNavItem.BuiltInItems.DASHBOARD);
 learnosetNavigationBar.addNavItem(LearnosetNavItem.BuiltInItems.SETTINGS);
 
+// setting Drawer Layout with Drawer Gravity. If LEFT then Navigation Bar opens from Left Side. If RIGHT then opens from right Side
+learnosetNavigationBar.setDrawerLayout(drawerLayout, LearnosetNavigationBar.DrawerGravity.LEFT);
+        
 // open drawer on button click
 openNavigationBtn.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -147,11 +150,21 @@ learnosetNavigationBar.addItemsGroup(navItemsGroup);
 
 <br>
 
-7. Using Dark or Light Theme of Navigation Bar
+7. Using Navigation Themes
 ```java
 learnosetNavigationBar.setTheme(LearnosetNavigationBar.NavThemes.DARK);
 // OR
 learnosetNavigationBar.setTheme(LearnosetNavigationBar.NavThemes.LIGHT);
+// OR
+// Setting Custom Theme
+CustomNavTheme customNavTheme = new CustomNavTheme();
+customNavTheme.setIconsColor(Color.parseColor("#FF03DAC5"));
+customNavTheme.setNavigationBackground(Color.BLACK);
+customNavTheme.setSelectedItemBackgroundColor(Color.parseColor("#FF03DAC5"));
+customNavTheme.setTextColor(Color.WHITE);
+
+learnosetNavigationBar.setTheme(customNavTheme);
+
 ```
 
 <br>
@@ -197,6 +210,13 @@ try {
 
 // setting header profile name and profile image (from URL)
 learnosetNavigationBar.setHeaderData("John Corner", "url of image");
+```
+
+<br>
+
+12. Hide Log Out Button
+```java
+learnosetNavigationBar.enableLogOutBtn(false);
 ```
 
 <br>
