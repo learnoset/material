@@ -83,6 +83,15 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
             holder.navItemLayout.setBackground(createRoundBackground());
             DrawableCompat.setTint(holder.navItemIcon.getDrawable(), Color.parseColor("#FFFFFF"));
             holder.navItemTitle.setTextColor(Color.WHITE);
+
+            if (learnosetNavItem.getFragment() != null) {
+                FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(learnosetNavItem.getFragmentContainerResId(), learnosetNavItem.getFragment(), null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
+            }
         } else {
             holder.navItemLayout.setBackgroundColor(Color.TRANSPARENT);
             DrawableCompat.setTint(holder.navItemIcon.getDrawable(), iconsColor);
