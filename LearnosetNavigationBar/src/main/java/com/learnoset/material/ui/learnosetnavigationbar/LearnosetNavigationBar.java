@@ -20,10 +20,12 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -220,7 +222,7 @@ public class LearnosetNavigationBar extends NavigationView {
     public void setHeaderData(String profileNameTxt, @Nullable String profileImageUrl) {
 
         if (profileImageUrl != null) {
-            //Picasso.get().load(profileImageUrl).into(headerImage);
+            Picasso.get().load(profileImageUrl).into(headerImage);
         }
 
         profileName.setText(profileNameTxt);
@@ -274,6 +276,84 @@ public class LearnosetNavigationBar extends NavigationView {
     public void addNavItem(LearnosetNavItem.BuiltInItems builtInItems) {
 
         LearnosetNavItem learnosetNavItem = new LearnosetNavItem();
+
+        if (builtInItems == LearnosetNavItem.BuiltInItems.DASHBOARD) {
+            learnosetNavItem.setTitle("Dashboard");
+            learnosetNavItem.setIcon(R.drawable.dashboard_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.HOME) {
+            learnosetNavItem.setTitle("Home");
+            learnosetNavItem.setIcon(R.drawable.home_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SEND) {
+            learnosetNavItem.setTitle("Send");
+            learnosetNavItem.setIcon(R.drawable.send_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SETTINGS) {
+            learnosetNavItem.setTitle("Settings");
+            learnosetNavItem.setIcon(R.drawable.settings_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.ABOUT_US) {
+            learnosetNavItem.setTitle("About Us");
+            learnosetNavItem.setIcon(R.drawable.about_us_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.CONTACT_US) {
+            learnosetNavItem.setTitle("Contact Us");
+            learnosetNavItem.setIcon(R.drawable.contact_us_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.DOWNLOAD) {
+            learnosetNavItem.setTitle("Downloads");
+            learnosetNavItem.setIcon(R.drawable.download_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.EMAIL) {
+            learnosetNavItem.setTitle("Email");
+            learnosetNavItem.setIcon(R.drawable.email_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.FAVOURITES) {
+            learnosetNavItem.setTitle("Favourites");
+            learnosetNavItem.setIcon(R.drawable.favourite_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.GALLERY) {
+            learnosetNavItem.setTitle("Gallery");
+            learnosetNavItem.setIcon(R.drawable.gallery_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.HELP) {
+            learnosetNavItem.setTitle("Help");
+            learnosetNavItem.setIcon(R.drawable.help_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.MESSAGE) {
+            learnosetNavItem.setTitle("Message");
+            learnosetNavItem.setIcon(R.drawable.message_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.FEEDBACK) {
+            learnosetNavItem.setTitle("Feedback");
+            learnosetNavItem.setIcon(R.drawable.feedback_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.PRIVACY_POLICY) {
+            learnosetNavItem.setTitle("Privacy Policy");
+            learnosetNavItem.setIcon(R.drawable.privacy_policy_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.RATE_US) {
+            learnosetNavItem.setTitle("Rate Us");
+            learnosetNavItem.setIcon(R.drawable.rate_us_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.UPLOAD) {
+            learnosetNavItem.setTitle("Upload");
+            learnosetNavItem.setIcon(R.drawable.upload_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.TOOLS) {
+            learnosetNavItem.setTitle("Tools");
+            learnosetNavItem.setIcon(R.drawable.tools_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SEARCH) {
+            learnosetNavItem.setTitle("Search");
+            learnosetNavItem.setIcon(R.drawable.search_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SHARE) {
+            learnosetNavItem.setTitle("Share");
+            learnosetNavItem.setIcon(R.drawable.share_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.TRASH) {
+            learnosetNavItem.setTitle("Trash");
+            learnosetNavItem.setIcon(R.drawable.trash_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.PROFILE) {
+            learnosetNavItem.setTitle("Profile");
+            learnosetNavItem.setIcon(R.drawable.profile_icon);
+        }
+
+        if (learnosetNavItems.size() == 0) {
+            learnosetNavItem.setSelected(true);
+        }
+
+        learnosetNavItems.add(learnosetNavItem);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+    }
+
+    public void addNavItem(LearnosetNavItem.BuiltInItems builtInItems, Fragment fragment, int fragmentContainerResId) {
+
+        LearnosetNavItem learnosetNavItem = new LearnosetNavItem();
+        learnosetNavItem.setFragment(fragment, fragmentContainerResId);
 
         if (builtInItems == LearnosetNavItem.BuiltInItems.DASHBOARD) {
             learnosetNavItem.setTitle("Dashboard");
