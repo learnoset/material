@@ -6,12 +6,13 @@ Learnoset Material UI is a powerful library for Android Studio that consist of
 <a href = "#navigation_bar"><li>Custom Navigation Drawer</li></a>
 <li>Material Bottom Bar</li>
 <li>Material Custom Dialogs</li>
+<li>Material Progress Bars</li>
 <li>Material Tab Layout</li>
 <li>Material Toast Messages</li>
 <li>Custom Designed Buttons</li>
 <li>Custom Designed EditText</li>
 </ul>
-<br><br>
+<br>
 
 <h3>Why use Learnoset Material UI Library</h3>
 <ul>
