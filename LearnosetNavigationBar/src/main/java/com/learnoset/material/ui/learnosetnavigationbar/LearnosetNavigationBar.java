@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -37,12 +36,15 @@ public class LearnosetNavigationBar extends NavigationView {
 
     public static int GROUPS_COUNT = 0;
     public static int selectedItemPosition = 0;
-    public static int drawerGravity;
+    public static int drawerGravity = GravityCompat.START;
+
     private final Context context;
     private final List<LearnosetNavItem> learnosetNavItems = new ArrayList<>();
     private final List<NavItemsGroup> navItemsGroups = new ArrayList<>();
-    private NavColors selectedIconColor = NavColors.DEFAULT;
-    private NavColors selectedItemBackground = NavColors.DEFAULT;
+    private int iconsColor;
+    private int navItemTxtColor;
+    private int navGroupTxtColor;
+    private int selectedItemBackgroundColor;
     private ImageView headerImage;
     private TextView profileName;
     private NavigationAdapter navigationAdapter;
@@ -57,12 +59,16 @@ public class LearnosetNavigationBar extends NavigationView {
     public LearnosetNavigationBar(@NonNull Context context) {
         super(context);
         this.context = context;
+        LearnosetNavigationBar.drawerGravity = GravityCompat.START;
+        gettingSelectedThemeDetails();
         init();
     }
 
     public LearnosetNavigationBar(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        LearnosetNavigationBar.drawerGravity = GravityCompat.START;
+        gettingSelectedThemeDetails();
         init();
     }
 
@@ -71,15 +77,18 @@ public class LearnosetNavigationBar extends NavigationView {
         learnosetNavItems.get(LearnosetNavigationBar.selectedItemPosition).setSelected(false);
         learnosetNavItems.get(navItemPosition).setSelected(true);
 
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
-    public void setDrawerGravity(DrawerGravity drawerGravity) {
+    public void setDrawerLayout(DrawerLayout drawerLayout, DrawerGravity drawerGravity) {
+
         if (drawerGravity == DrawerGravity.LEFT) {
             LearnosetNavigationBar.drawerGravity = GravityCompat.START;
         } else {
             LearnosetNavigationBar.drawerGravity = GravityCompat.END;
         }
+
+        navigationAdapter.setDrawerLayout(drawerLayout);
     }
 
     public void setTheme(NavThemes theme) {
@@ -95,21 +104,113 @@ public class LearnosetNavigationBar extends NavigationView {
             navLogOutTxt.setTextColor(Color.WHITE);
         }
 
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        gettingSelectedThemeDetails();
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
+
+    public void setTheme(CustomNavTheme customNavigationTheme) {
+
+        if (customNavigationTheme.getNavigationBackground() != 0) {
+            headerRootLayout.setBackgroundColor(customNavigationTheme.getNavigationBackground());
+            bodyRootLayout.setBackgroundColor(customNavigationTheme.getNavigationBackground());
+        }
+
+        if (customNavigationTheme.getTextColor() != 0) {
+            profileName.setTextColor(customNavigationTheme.getTextColor());
+            wishMessage.setTextColor(customNavigationTheme.getTextColor());
+            navLogOutTxt.setTextColor(customNavigationTheme.getTextColor());
+            navItemTxtColor = customNavigationTheme.getTextColor();
+        }
+
+        if (customNavigationTheme.getIconsColor() != 0) {
+            iconsColor = customNavigationTheme.getIconsColor();
+        }
+
+        if(customNavigationTheme.getGroupNameColor() != 0){
+            navGroupTxtColor = customNavigationTheme.getGroupNameColor();
+        }
+
+        if (customNavigationTheme.getSelectedItemBackgroundColor() != 0) {
+            selectedItemBackgroundColor = customNavigationTheme.getSelectedItemBackgroundColor();
+        }
+
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+    }
+
+    private void gettingSelectedThemeDetails() {
+
+        if (selectedTheme == NavThemes.DARK) {
+            iconsColor = Color.parseColor("#E6FFFFFF");
+            navItemTxtColor = Color.parseColor("#E6FFFFFF");
+            navGroupTxtColor = Color.parseColor("#66FFFFFF");
+            selectedItemBackgroundColor = Color.parseColor("#4C74FA");
+        } else {
+            iconsColor = Color.parseColor("#99000000");
+            navItemTxtColor = Color.parseColor("#99000000");
+            selectedItemBackgroundColor = Color.parseColor("#4C74FA");
+            navGroupTxtColor = Color.parseColor("#66000000");
+        }
+    }
+
+    private String getNavColorValue(NavColors navColor) {
+
+        String selectedColorValue = "";
+
+        if (navColor == LearnosetNavigationBar.NavColors.RED) {
+            selectedColorValue = "#FFFF1744";
+        } else if (navColor == LearnosetNavigationBar.NavColors.BLACK) {
+            selectedColorValue = "#000000";
+        } else if (navColor == LearnosetNavigationBar.NavColors.GRAY) {
+            selectedColorValue = "#998A8A8A";
+        } else if (navColor == LearnosetNavigationBar.NavColors.ORANGE) {
+            selectedColorValue = "#FF9100";
+        } else if (navColor == LearnosetNavigationBar.NavColors.WHITE) {
+            selectedColorValue = "#FFFFFF";
+        } else if (navColor == LearnosetNavigationBar.NavColors.YELLOW) {
+            selectedColorValue = "#FFEA00";
+        } else if (navColor == LearnosetNavigationBar.NavColors.DARK_RED) {
+            selectedColorValue = "#FFD50000";
+        } else if (navColor == LearnosetNavigationBar.NavColors.LIGHT_RED) {
+            selectedColorValue = "#FFFF8A80";
+        } else if (navColor == LearnosetNavigationBar.NavColors.DARK_ORANGE) {
+            selectedColorValue = "#FFFF6D00";
+        } else if (navColor == LearnosetNavigationBar.NavColors.LIGHT_ORANGE) {
+            selectedColorValue = "#FFFFD180";
+        } else if (navColor == LearnosetNavigationBar.NavColors.BLUE) {
+            selectedColorValue = "#FF00B0FF";
+        } else if (navColor == LearnosetNavigationBar.NavColors.DARK_BLUE) {
+            selectedColorValue = "#FF0091EA";
+        } else if (navColor == LearnosetNavigationBar.NavColors.LIGHT_BLUE) {
+            selectedColorValue = "#FF80D8FF";
+        }
+
+        return selectedColorValue;
+    }
+
 
     public void setEventListener(NavigationEventListener navigationEventListener) {
         this.navigationEventListener = navigationEventListener;
     }
 
     public void setIconsColor(NavColors iconsColor) {
-        this.selectedIconColor = iconsColor;
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+
+        if (iconsColor == NavColors.DEFAULT) {
+            gettingSelectedThemeDetails();
+        } else {
+            this.iconsColor = Color.parseColor(getNavColorValue(iconsColor));
+        }
+
+        navigationAdapter.reloadNavigationBar(this.iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
     public void setSelectedItemBackground(NavColors selectedItemBackgroundColor) {
-        this.selectedItemBackground = selectedItemBackgroundColor;
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        if (selectedItemBackgroundColor == NavColors.DEFAULT) {
+            gettingSelectedThemeDetails();
+        } else {
+            this.selectedItemBackgroundColor = Color.parseColor(getNavColorValue(selectedItemBackgroundColor));
+        }
+
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, this.selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
     public void setHeaderData(String profileNameTxt) {
@@ -119,7 +220,7 @@ public class LearnosetNavigationBar extends NavigationView {
     public void setHeaderData(String profileNameTxt, @Nullable String profileImageUrl) {
 
         if (profileImageUrl != null) {
-            Picasso.get().load(profileImageUrl).into(headerImage);
+            //Picasso.get().load(profileImageUrl).into(headerImage);
         }
 
         profileName.setText(profileNameTxt);
@@ -244,12 +345,12 @@ public class LearnosetNavigationBar extends NavigationView {
         }
 
         learnosetNavItems.add(learnosetNavItem);
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
     public void addNavItem(LearnosetNavItem learnosetNavItem) {
         learnosetNavItems.add(learnosetNavItem);
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
     public void addNavItems(List<LearnosetNavItem> learnosetNavItem) {
@@ -259,7 +360,7 @@ public class LearnosetNavigationBar extends NavigationView {
         }
 
         learnosetNavItems.addAll(learnosetNavItem);
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
     public void addItemsGroup(NavItemsGroup navItemsGroup) {
@@ -270,12 +371,23 @@ public class LearnosetNavigationBar extends NavigationView {
 
         navItemsGroups.add(navItemsGroup);
         learnosetNavItems.addAll(navItemsGroup.getGroupItems());
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
     public void removeItem(int itemPosition) {
         learnosetNavItems.remove(itemPosition);
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+    }
+
+    public void setBackgroundColor(int color) {
+    }
+
+    public void enableLogOutBtn(boolean enable) {
+        if (enable) {
+            navLogOutLayout.setVisibility(View.VISIBLE);
+        } else {
+            navLogOutLayout.setVisibility(View.GONE);
+        }
     }
 
     public void removeGroup(String groupName) {
@@ -296,8 +408,7 @@ public class LearnosetNavigationBar extends NavigationView {
             }
         }
 
-
-        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
     @SuppressLint("InflateParams")
@@ -325,7 +436,7 @@ public class LearnosetNavigationBar extends NavigationView {
         navItemsRecyclerView.setHasFixedSize(true);
         navItemsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, selectedIconColor, selectedTheme, selectedItemBackground, navigationEventListener, (DrawerLayout) getRootView());
+        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, iconsColor, selectedTheme, selectedItemBackgroundColor, navigationEventListener, navItemTxtColor, navGroupTxtColor);
         navItemsRecyclerView.setAdapter(navigationAdapter);
 
         navigationEventListener = null;

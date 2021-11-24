@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -29,89 +28,34 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     private final List<NavItemsGroup> navItemsGroups;
     private final Context context;
     private final NavigationEventListener navigationEventListener;
-    private String iconColorCode;
-    private String selectedItemBackgroundColor;
-    private List<Integer> groupIds = new ArrayList<>();
-    private LearnosetNavigationBar.NavColors selectedIconColor;
+    private final List<Integer> groupIds = new ArrayList<>();
+    private int iconsColor;
+    private int navItemsTxtColor;
+    private int navGroupTxtColor;
+    private int selectedItemBackgroundColor;
     private LearnosetNavigationBar.NavThemes selectedNavTheme;
-    private LearnosetNavigationBar.NavColors selectedItemBackground;
     private DrawerLayout drawerLayout;
 
-    public NavigationAdapter(Context context, List<LearnosetNavItem> learnosetNavItems, List<NavItemsGroup> navItemsGroups, LearnosetNavigationBar.NavColors selectedIconColor, LearnosetNavigationBar.NavThemes selectedNavTheme, LearnosetNavigationBar.NavColors selectedItemBackground, NavigationEventListener navigationEventListener, DrawerLayout drawerLayout) {
+    public NavigationAdapter(Context context, List<LearnosetNavItem> learnosetNavItems, List<NavItemsGroup> navItemsGroups, int iconsColor, LearnosetNavigationBar.NavThemes selectedNavTheme, int selectedItemBackgroundColor, NavigationEventListener navigationEventListener, int navItemsTxtColor, int navGroupTxtColor) {
 
-        this.selectedIconColor = selectedIconColor;
+        this.drawerLayout = null;
         this.selectedNavTheme = selectedNavTheme;
-        this.selectedItemBackground = selectedItemBackground;
         this.learnosetNavItems = learnosetNavItems;
         this.navItemsGroups = navItemsGroups;
+        this.navGroupTxtColor = navGroupTxtColor;
         this.context = context;
         this.navigationEventListener = navigationEventListener;
+        this.iconsColor = iconsColor;
+        this.navItemsTxtColor = navItemsTxtColor;
+        this.selectedItemBackgroundColor = selectedItemBackgroundColor;
+    }
+
+    public void setDrawerLayout(DrawerLayout drawerLayout) {
         this.drawerLayout = drawerLayout;
-        gettingSelectedThemeDetails();
     }
 
     public void addNewItem(LearnosetNavItem learnosetNavItem) {
         learnosetNavItems.add(learnosetNavItem);
-    }
-
-    private void gettingSelectedThemeDetails() {
-
-        if (selectedIconColor == LearnosetNavigationBar.NavColors.DEFAULT) {
-            if (selectedNavTheme == LearnosetNavigationBar.NavThemes.DARK) {
-                iconColorCode = "#E6FFFFFF";
-            } else {
-                iconColorCode = "#99000000";
-            }
-        } else {
-            this.iconColorCode = getNavColorValue(selectedIconColor);
-        }
-
-        if (selectedItemBackground == LearnosetNavigationBar.NavColors.DEFAULT) {
-
-            if (selectedNavTheme == LearnosetNavigationBar.NavThemes.DARK) {
-                this.selectedItemBackgroundColor = "#4C74FA";
-            } else {
-                this.selectedItemBackgroundColor = "#4C74FA";
-            }
-        } else {
-            this.selectedItemBackgroundColor = getNavColorValue(selectedItemBackground);
-        }
-
-    }
-
-    private String getNavColorValue(LearnosetNavigationBar.NavColors navColor) {
-
-        String selectedColorValue = "";
-
-        if (navColor == LearnosetNavigationBar.NavColors.RED) {
-            selectedColorValue = "#FFFF1744";
-        } else if (navColor == LearnosetNavigationBar.NavColors.BLACK) {
-            selectedColorValue = "#000000";
-        } else if (navColor == LearnosetNavigationBar.NavColors.GRAY) {
-            selectedColorValue = "#998A8A8A";
-        } else if (navColor == LearnosetNavigationBar.NavColors.ORANGE) {
-            selectedColorValue = "#FF9100";
-        } else if (navColor == LearnosetNavigationBar.NavColors.WHITE) {
-            selectedColorValue = "#FFFFFF";
-        } else if (navColor == LearnosetNavigationBar.NavColors.YELLOW) {
-            selectedColorValue = "#FFEA00";
-        } else if (navColor == LearnosetNavigationBar.NavColors.DARK_RED) {
-            selectedColorValue = "#FFD50000";
-        } else if (navColor == LearnosetNavigationBar.NavColors.LIGHT_RED) {
-            selectedColorValue = "#FFFF8A80";
-        } else if (navColor == LearnosetNavigationBar.NavColors.DARK_ORANGE) {
-            selectedColorValue = "#FFFF6D00";
-        } else if (navColor == LearnosetNavigationBar.NavColors.LIGHT_ORANGE) {
-            selectedColorValue = "#FFFFD180";
-        } else if (navColor == LearnosetNavigationBar.NavColors.BLUE) {
-            selectedColorValue = "#FF00B0FF";
-        } else if (navColor == LearnosetNavigationBar.NavColors.DARK_BLUE) {
-            selectedColorValue = "#FF0091EA";
-        } else if (navColor == LearnosetNavigationBar.NavColors.LIGHT_BLUE) {
-            selectedColorValue = "#FF80D8FF";
-        }
-
-        return selectedColorValue;
     }
 
     public void removeItem(int position) {
@@ -121,12 +65,12 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     @SuppressLint("InflateParams")
     @NonNull
     @Override
-    public NavigationAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.nav_adapter_layout, null));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NavigationAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         LearnosetNavItem learnosetNavItem = learnosetNavItems.get(position);
 
@@ -141,13 +85,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
             holder.navItemTitle.setTextColor(Color.WHITE);
         } else {
             holder.navItemLayout.setBackgroundColor(Color.TRANSPARENT);
-            DrawableCompat.setTint(holder.navItemIcon.getDrawable(), Color.parseColor(iconColorCode));
+            DrawableCompat.setTint(holder.navItemIcon.getDrawable(), iconsColor);
 
-            if (selectedNavTheme == LearnosetNavigationBar.NavThemes.DARK) {
-                holder.navItemTitle.setTextColor(Color.parseColor("#E6FFFFFF"));
-            } else {
-                holder.navItemTitle.setTextColor(Color.parseColor("#99000000"));
-            }
+            holder.navItemTitle.setTextColor(navItemsTxtColor);
 
         }
 
@@ -155,12 +95,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
             groupIds.add(learnosetNavItem.groupId);
             holder.groupName.setText(getGroupName(learnosetNavItem.groupId));
             holder.groupName.setVisibility(View.VISIBLE);
+            holder.groupName.setTextColor(navGroupTxtColor);
 
-            if (selectedNavTheme == LearnosetNavigationBar.NavThemes.DARK) {
-                holder.groupName.setTextColor(Color.parseColor("#66FFFFFF"));
-            } else {
-                holder.groupName.setTextColor(Color.parseColor("#66000000"));
-            }
         } else {
             holder.groupName.setVisibility(View.GONE);
         }
@@ -169,13 +105,15 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
             learnosetNavItems.get(LearnosetNavigationBar.selectedItemPosition).setSelected(false);
             learnosetNavItems.get(position).setSelected(true);
 
-            reloadNavigationBar(selectedIconColor, selectedNavTheme, selectedItemBackground);
+            reloadNavigationBar(iconsColor, selectedNavTheme, selectedItemBackgroundColor, navItemsTxtColor, navGroupTxtColor);
 
             if (navigationEventListener != null) {
                 navigationEventListener.onItemSelected(position, learnosetNavItem);
             }
 
-            drawerLayout.closeDrawer(LearnosetNavigationBar.drawerGravity);
+            if (drawerLayout != null) {
+                drawerLayout.closeDrawer(LearnosetNavigationBar.drawerGravity);
+            }
 
             if (learnosetNavItem.getFragment() != null) {
                 FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
@@ -201,12 +139,13 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         return isGroupAdded;
     }
 
-    public void reloadNavigationBar(LearnosetNavigationBar.NavColors selectedIconColor, LearnosetNavigationBar.NavThemes selectedNavTheme, LearnosetNavigationBar.NavColors selectedItemBackground) {
-        this.selectedIconColor = selectedIconColor;
+    public void reloadNavigationBar(int iconsColor, LearnosetNavigationBar.NavThemes selectedNavTheme, int selectedItemBackgroundColor, int navItemsTxtColor, int navGroupTxtColor) {
+        this.iconsColor = iconsColor;
         this.selectedNavTheme = selectedNavTheme;
-        this.selectedItemBackground = selectedItemBackground;
+        this.selectedItemBackgroundColor = selectedItemBackgroundColor;
+        this.navItemsTxtColor = navItemsTxtColor;
+        this.navGroupTxtColor = navGroupTxtColor;
 
-        gettingSelectedThemeDetails();
         groupIds.clear();
         notifyDataSetChanged();
     }
@@ -215,7 +154,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
         GradientDrawable shape = new GradientDrawable();
         shape.setShape(GradientDrawable.RECTANGLE);
-        shape.setColor(Color.parseColor(selectedItemBackgroundColor));
+        shape.setColor(selectedItemBackgroundColor);
         shape.setCornerRadius(20);
 
         return shape;
