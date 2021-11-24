@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -98,9 +99,14 @@ public class LearnosetNavigationBar extends NavigationView {
     public void setHeaderData(@Nullable String profileImageUrl, String profileNameTxt) {
 
         if (profileImageUrl != null) {
-            //Picasso.get().load(profileImageUrl).into(headerImage);
+            Picasso.get().load(profileImageUrl).into(headerImage);
         }
 
+        profileName.setText(profileNameTxt);
+    }
+
+    public void setHeaderData(@Nullable int profileImageResId, String profileNameTxt) {
+        headerImage.setImageResource(profileImageResId);
         profileName.setText(profileNameTxt);
     }
 
