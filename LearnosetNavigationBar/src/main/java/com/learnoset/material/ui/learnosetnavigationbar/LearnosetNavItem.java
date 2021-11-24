@@ -1,14 +1,55 @@
 package com.learnoset.material.ui.learnosetnavigationbar;
 
+import androidx.fragment.app.Fragment;
+
 public class LearnosetNavItem {
 
     protected int groupId;
     private int itemIcon = R.drawable.error_icon;
     private String itemName = "";
     private NavItemsGroup navItemsGroup;
+    private boolean selected = false;
+    private Fragment fragment;
+    private int fragmentContainerResId;
 
     public LearnosetNavItem() {
         this.groupId = -1;
+        fragment = null;
+    }
+
+    public LearnosetNavItem(String itemTitle, int itemResIconId) {
+        this.groupId = -1;
+        this.itemName = itemTitle;
+        this.itemIcon = itemResIconId;
+        fragment = null;
+    }
+
+    public LearnosetNavItem(String itemTitle, int itemResIconId, Fragment fragment, int fragmentContainerResId) {
+        this.groupId = -1;
+        this.itemName = itemTitle;
+        this.itemIcon = itemResIconId;
+        this.fragment = fragment;
+        this.fragmentContainerResId = fragmentContainerResId;
+    }
+
+    public LearnosetNavItem(String itemTitle , Fragment fragment, int fragmentContainerResId) {
+        this.groupId = -1;
+        this.itemName = itemTitle;
+        this.fragment = fragment;
+        this.fragmentContainerResId = fragmentContainerResId;
+    }
+
+    public void setFragment(Fragment fragment, int fragmentContainerResId){
+        this.fragment = fragment;
+        this.fragmentContainerResId = fragmentContainerResId;
+    }
+
+    public Fragment getFragment(){
+        return fragment;
+    }
+
+    public int getFragmentContainerResId(){
+        return fragmentContainerResId;
     }
 
     public void setTitle(String itemTitle){
@@ -16,7 +57,7 @@ public class LearnosetNavItem {
     }
 
     public void setIcon(int itemResIconId){
-        this.itemIcon = itemIcon;
+        this.itemIcon = itemResIconId;
     }
 
     public String getTitle() {
@@ -25,6 +66,14 @@ public class LearnosetNavItem {
 
     public int getIcon() {
         return itemIcon;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public enum BuiltInItems {

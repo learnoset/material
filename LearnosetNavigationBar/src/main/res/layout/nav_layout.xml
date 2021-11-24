@@ -4,21 +4,58 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/bodyRootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="90dp"
+        android:paddingTop="30dp"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/navItemsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBar" />
 
         <LinearLayout
+            android:id="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/navLogOutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="15dp">
+
+                <ImageView
+                    android:id="@+id/navItemIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/logout_icon" />
+
+                <TextView
+                    android:id="@+id/navLogOutTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@+id/navItemIcon"
+                    android:fontFamily="@font/hammersmith_one"
+                    android:text="Log Out"
+                    android:textColor="#99000000"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
         </LinearLayout>
     </RelativeLayout>

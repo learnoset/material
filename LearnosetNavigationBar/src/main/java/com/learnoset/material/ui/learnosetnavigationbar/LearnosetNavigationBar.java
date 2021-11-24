@@ -4,12 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -34,11 +36,18 @@ public class LearnosetNavigationBar extends NavigationView {
     private final Context context;
     private final List<LearnosetNavItem> learnosetNavItems = new ArrayList<>();
     private final List<NavItemsGroup> navItemsGroups = new ArrayList<>();
+    private NavColors selectedIconColor = NavColors.DEFAULT;
+    private NavColors selectedItemBackground = NavColors.DEFAULT;
     private ImageView headerImage;
     private TextView profileName;
     private NavigationAdapter navigationAdapter;
     private NavThemes selectedTheme = NavThemes.LIGHT;
-    private final IconColors selectedIconColor = IconColors.DEFAULT;
+    private LinearLayout headerRootLayout;
+    private RelativeLayout bodyRootLayout;
+    private RelativeLayout navLogOutLayout;
+    private TextView navLogOutTxt;
+    private TextView wishMessage;
+    private NavigationEventListener navigationEventListener;
 
     public LearnosetNavigationBar(@NonNull Context context) {
         super(context);
@@ -54,6 +63,32 @@ public class LearnosetNavigationBar extends NavigationView {
 
     public void setTheme(NavThemes theme) {
         this.selectedTheme = theme;
+
+        if (selectedTheme == NavThemes.DARK) {
+            headerRootLayout.setBackgroundColor(Color.parseColor("#0E0E0E"));
+            bodyRootLayout.setBackgroundColor(Color.parseColor("#0E0E0E"));
+
+            profileName.setTextColor(Color.parseColor("#FFFFFF"));
+            wishMessage.setTextColor(Color.parseColor("#CCFFFFFF"));
+
+            navLogOutTxt.setTextColor(Color.WHITE);
+        }
+
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+    }
+
+    public void setEventListener(NavigationEventListener navigationEventListener) {
+        this.navigationEventListener = navigationEventListener;
+    }
+
+    public void setIconsColor(NavColors iconsColor){
+        this.selectedIconColor = iconsColor;
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
+    }
+
+    public void setSelectedItemBackground(NavColors selectedItemBackgroundColor){
+        this.selectedItemBackground = selectedItemBackgroundColor;
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     public void setHeaderData(String profileNameTxt) {
@@ -63,7 +98,7 @@ public class LearnosetNavigationBar extends NavigationView {
     public void setHeaderData(@Nullable String profileImageUrl, String profileNameTxt) {
 
         if (profileImageUrl != null) {
-            Picasso.get().load(profileImageUrl).into(headerImage);
+            //Picasso.get().load(profileImageUrl).into(headerImage);
         }
 
         profileName.setText(profileNameTxt);
@@ -110,35 +145,111 @@ public class LearnosetNavigationBar extends NavigationView {
     }
 
     public void addNavItem(LearnosetNavItem.BuiltInItems builtInItems) {
+
         LearnosetNavItem learnosetNavItem = new LearnosetNavItem();
 
         if (builtInItems == LearnosetNavItem.BuiltInItems.DASHBOARD) {
             learnosetNavItem.setTitle("Dashboard");
+            learnosetNavItem.setIcon(R.drawable.dashboard_icon);
         } else if (builtInItems == LearnosetNavItem.BuiltInItems.HOME) {
             learnosetNavItem.setTitle("Home");
+            learnosetNavItem.setIcon(R.drawable.home_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SEND) {
+            learnosetNavItem.setTitle("Send");
+            learnosetNavItem.setIcon(R.drawable.send_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SETTINGS) {
+            learnosetNavItem.setTitle("Settings");
+            learnosetNavItem.setIcon(R.drawable.settings_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.ABOUT_US) {
+            learnosetNavItem.setTitle("About Us");
+            learnosetNavItem.setIcon(R.drawable.about_us_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.CONTACT_US) {
+            learnosetNavItem.setTitle("Contact Us");
+            learnosetNavItem.setIcon(R.drawable.contact_us_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.DOWNLOAD) {
+            learnosetNavItem.setTitle("Downloads");
+            learnosetNavItem.setIcon(R.drawable.download_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.EMAIL) {
+            learnosetNavItem.setTitle("Email");
+            learnosetNavItem.setIcon(R.drawable.email_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.FAVOURITES) {
+            learnosetNavItem.setTitle("Favourites");
+            learnosetNavItem.setIcon(R.drawable.favourite_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.GALLERY) {
+            learnosetNavItem.setTitle("Gallery");
+            learnosetNavItem.setIcon(R.drawable.gallery_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.HELP) {
+            learnosetNavItem.setTitle("Help");
+            learnosetNavItem.setIcon(R.drawable.help_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.MESSAGE) {
+            learnosetNavItem.setTitle("Message");
+            learnosetNavItem.setIcon(R.drawable.message_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.FEEDBACK) {
+            learnosetNavItem.setTitle("Feedback");
+            learnosetNavItem.setIcon(R.drawable.feedback_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.PRIVACY_POLICY) {
+            learnosetNavItem.setTitle("Privacy Policy");
+            learnosetNavItem.setIcon(R.drawable.privacy_policy_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.RATE_US) {
+            learnosetNavItem.setTitle("Rate Us");
+            learnosetNavItem.setIcon(R.drawable.rate_us_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.UPLOAD) {
+            learnosetNavItem.setTitle("Upload");
+            learnosetNavItem.setIcon(R.drawable.upload_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.TOOLS) {
+            learnosetNavItem.setTitle("Tools");
+            learnosetNavItem.setIcon(R.drawable.tools_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SEARCH) {
+            learnosetNavItem.setTitle("Search");
+            learnosetNavItem.setIcon(R.drawable.search_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.SHARE) {
+            learnosetNavItem.setTitle("Share");
+            learnosetNavItem.setIcon(R.drawable.share_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.TRASH) {
+            learnosetNavItem.setTitle("Trash");
+            learnosetNavItem.setIcon(R.drawable.trash_icon);
+        } else if (builtInItems == LearnosetNavItem.BuiltInItems.PROFILE) {
+            learnosetNavItem.setTitle("Profile");
+            learnosetNavItem.setIcon(R.drawable.profile_icon);
         }
+
+        if (learnosetNavItems.size() == 0) {
+            learnosetNavItem.setSelected(true);
+        }
+
         learnosetNavItems.add(learnosetNavItem);
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     public void addNavItem(LearnosetNavItem learnosetNavItem) {
         learnosetNavItems.add(learnosetNavItem);
-        navigationAdapter.notifyDataSetChanged();
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     public void addNavItems(List<LearnosetNavItem> learnosetNavItem) {
+
+        if (learnosetNavItems.size() == 0) {
+            learnosetNavItem.get(0).setSelected(true);
+        }
+
         learnosetNavItems.addAll(learnosetNavItem);
-        navigationAdapter.notifyDataSetChanged();
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     public void addItemsGroup(NavItemsGroup navItemsGroup) {
+
+        if (learnosetNavItems.size() == 0) {
+            navItemsGroup.getGroupItems().get(0).setSelected(true);
+        }
+
         navItemsGroups.add(navItemsGroup);
         learnosetNavItems.addAll(navItemsGroup.getGroupItems());
-        navigationAdapter.notifyDataSetChanged();
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     public void removeItem(int itemPosition) {
         learnosetNavItems.remove(itemPosition);
-        navigationAdapter.notifyDataSetChanged();
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     public void removeGroup(String groupName) {
@@ -160,7 +271,7 @@ public class LearnosetNavigationBar extends NavigationView {
         }
 
 
-        navigationAdapter.notifyDataSetChanged();
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     @SuppressLint("InflateParams")
@@ -175,16 +286,23 @@ public class LearnosetNavigationBar extends NavigationView {
 
         profileName = headerView.findViewById(R.id.headerProfileName);
         headerImage = headerView.findViewById(R.id.headerImageView);
+        headerRootLayout = headerView.findViewById(R.id.headerRootLayout);
+        wishMessage = headerView.findViewById(R.id.headerWishMessage);
 
-        final TextView wishMessage = headerView.findViewById(R.id.headerWishMessage);
         wishMessage.setText(generateWishMessage());
 
         final RecyclerView navItemsRecyclerView = bodyView.findViewById(R.id.navItemsRecyclerView);
+        bodyRootLayout = bodyView.findViewById(R.id.bodyRootLayout);
+        navLogOutLayout = bodyView.findViewById(R.id.navLogOutLayout);
+        navLogOutTxt = bodyView.findViewById(R.id.navLogOutTxt);
+
         navItemsRecyclerView.setHasFixedSize(true);
         navItemsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, selectedIconColor, selectedTheme);
+        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, selectedIconColor, selectedTheme, selectedItemBackground, navigationEventListener);
+        navItemsRecyclerView.setAdapter(navigationAdapter);
 
+        navigationEventListener = null;
     }
 
     private String generateWishMessage() {
@@ -206,7 +324,7 @@ public class LearnosetNavigationBar extends NavigationView {
         FILL
     }
 
-    public enum IconColors {
+    public enum NavColors {
         DEFAULT,
         GRAY,
         RED,
