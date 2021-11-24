@@ -3,7 +3,7 @@
 
 Learnoset Material UI is a powerful library for Android Studio that consist of
 <ul>
-<a href = ""><li>Custom Navigation Drawer</li></a>
+<a href = "#navigation_bar"><li>Custom Navigation Drawer</li></a>
 <li>Material Bottom Bar</li>
 <li>Material Custom Dialogs</li>
 <li>Material Tab Layout</li>
@@ -32,7 +32,7 @@ Learnoset Material UI is a powerful library for Android Studio that consist of
  </li> 
 </ul>
 <br><br>
-<h3>How to use Custom Navigation Drawer in Android Studio</h3>
+<h3 id = "navigation_bar">How to use Custom Navigation Drawer in Android Studio</h3>
 1. Add below line in your module level build.gradle file
 
 ```groovy
