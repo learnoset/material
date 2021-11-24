@@ -174,7 +174,7 @@ learnosetNavigationBar.setSelectedItemBackground(LearnosetNavigationBar.NavColor
 
 <br>
 
-9. Change Icons Color
+10. Change Icons Color
 ```java
 learnosetNavigationBar.setIconsColor(LearnosetNavigationBar.NavColors.RED);
 ```
