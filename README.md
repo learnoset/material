@@ -182,6 +182,25 @@ learnosetNavigationBar.setIconsColor(LearnosetNavigationBar.NavColors.RED);
 
 <br>
 
+11. Setting Header Data (Profile Name & Profile Picture)
+```java
+// setting header profile name and profile image (from resources)
+learnosetNavigationBar.setHeaderData("John Corner", R.drawable.profile_image);
+
+// setting header profile name and profile image (from File)
+File file = new File("You Image File Path");
+try {
+    learnosetNavigationBar.setHeaderData("John Corner", file);
+} catch (LearnosetExceptions learnosetExceptions) {
+    learnosetExceptions.printStackTrace();
+}
+
+// setting header profile name and profile image (from URL)
+learnosetNavigationBar.setHeaderData("John Corner", "url of image");
+```
+
+<br>
+
 You can Visit our Website to learn more about Android App Development<br>
 [Learnoset Website](https://learnoset.com/)
 
