@@ -34,6 +34,7 @@ import java.util.Locale;
 public class LearnosetNavigationBar extends NavigationView {
 
     public static int GROUPS_COUNT = 0;
+    public static int selectedItemPosition = 0;
     private final Context context;
     private final List<LearnosetNavItem> learnosetNavItems = new ArrayList<>();
     private final List<NavItemsGroup> navItemsGroups = new ArrayList<>();
@@ -60,6 +61,14 @@ public class LearnosetNavigationBar extends NavigationView {
         super(context, attrs);
         this.context = context;
         init();
+    }
+
+    public void setSelected(int navItemPosition){
+
+        learnosetNavItems.get(LearnosetNavigationBar.selectedItemPosition).setSelected(false);
+        learnosetNavItems.get(navItemPosition).setSelected(true);
+
+        navigationAdapter.reloadNavigationBar(selectedIconColor, selectedTheme, selectedItemBackground);
     }
 
     public void setTheme(NavThemes theme) {
@@ -96,7 +105,7 @@ public class LearnosetNavigationBar extends NavigationView {
         profileName.setText(profileNameTxt);
     }
 
-    public void setHeaderData(@Nullable String profileImageUrl, String profileNameTxt) {
+    public void setHeaderData(String profileNameTxt, @Nullable String profileImageUrl) {
 
         if (profileImageUrl != null) {
             Picasso.get().load(profileImageUrl).into(headerImage);
@@ -105,12 +114,12 @@ public class LearnosetNavigationBar extends NavigationView {
         profileName.setText(profileNameTxt);
     }
 
-    public void setHeaderData(@Nullable int profileImageResId, String profileNameTxt) {
+    public void setHeaderData(String profileNameTxt, @Nullable int profileImageResId) {
         headerImage.setImageResource(profileImageResId);
         profileName.setText(profileNameTxt);
     }
 
-    public void setHeaderData(File profileImageFile, String profileNameTxt) throws LearnosetExceptions {
+    public void setHeaderData(String profileNameTxt, @Nullable File profileImageFile) throws LearnosetExceptions {
         profileName.setText(profileNameTxt);
 
         if (profileImageFile.exists()) {
@@ -124,7 +133,7 @@ public class LearnosetNavigationBar extends NavigationView {
         }
     }
 
-    public void setHeaderData(Uri profileImageUri, String profileNameTxt) throws LearnosetExceptions {
+    public void setHeaderData(String profileNameTxt, @Nullable Uri profileImageUri) throws LearnosetExceptions {
         profileName.setText(profileNameTxt);
 
         final ContentResolver contentResolver = context.getContentResolver();

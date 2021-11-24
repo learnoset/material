@@ -28,7 +28,6 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     private final NavigationEventListener navigationEventListener;
     private String iconColorCode;
     private String selectedItemBackgroundColor;
-    private int selectedItemPosition = 0;
     private int groupId = -1;
     private LearnosetNavigationBar.NavColors selectedIconColor;
     private LearnosetNavigationBar.NavThemes selectedNavTheme;
@@ -131,7 +130,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         holder.navItemIcon.setImageResource(learnosetNavItem.getIcon());
 
         if (learnosetNavItem.isSelected()) {
-            selectedItemPosition = position;
+            LearnosetNavigationBar.selectedItemPosition = position;
 
             holder.navItemLayout.setBackground(createRoundBackground());
             DrawableCompat.setTint(holder.navItemIcon.getDrawable(), Color.parseColor("#FFFFFF"));
@@ -164,7 +163,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         }
 
         holder.navItemLayout.setOnClickListener(v -> {
-            learnosetNavItems.get(selectedItemPosition).setSelected(false);
+            learnosetNavItems.get(LearnosetNavigationBar.selectedItemPosition).setSelected(false);
             learnosetNavItems.get(position).setSelected(true);
 
             reloadNavigationBar(selectedIconColor, selectedNavTheme, selectedItemBackground);
