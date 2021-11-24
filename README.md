@@ -204,7 +204,7 @@ learnosetNavigationBar.setHeaderData("John Corner", "url of image");
 
 <br>
 
-11. Hide Log Out Button
+12. Hide Log Out Button
 ```java
 learnosetNavigationBar.enableLogOutBtn(false);
 ```
