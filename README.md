@@ -45,7 +45,15 @@ implementation 'com.github.learnoset:material.ui:2.23'
 2. Add below line in your project level build.gradle file
 
 ```groovy
-maven {url 'https://jitpack.io' }
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        
+        // add below line
+        maven {url 'https://jitpack.io' }
+    }
+}
 ```
 
 <br>
