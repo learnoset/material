@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -237,11 +238,7 @@ public class LearnosetNavigationBar extends NavigationView {
         profileName.setText(profileNameTxt);
 
         if (profileImageFile.exists()) {
-            Uri imageUri = FileProvider.getUriForFile(
-                    context,
-                    "com.learnoset.fileprovider",
-                    profileImageFile);
-            headerImage.setImageURI(imageUri);
+            headerImage.setImageBitmap(BitmapFactory.decodeFile(profileImageFile.getAbsolutePath()));
         } else {
             throw new LearnosetExceptions("Invalid File Path");
         }
