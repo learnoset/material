@@ -33,10 +33,12 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     private int navItemsTxtColor;
     private int navGroupTxtColor;
     private int selectedItemBackgroundColor;
+    private int selectedItemIconColor;
+    private int selectedItemTextColor;
     private LearnosetNavigationBar.NavThemes selectedNavTheme;
     private DrawerLayout drawerLayout;
 
-    public NavigationAdapter(Context context, List<LearnosetNavItem> learnosetNavItems, List<NavItemsGroup> navItemsGroups, int iconsColor, LearnosetNavigationBar.NavThemes selectedNavTheme, int selectedItemBackgroundColor, NavigationEventListener navigationEventListener, int navItemsTxtColor, int navGroupTxtColor) {
+    public NavigationAdapter(Context context, List<LearnosetNavItem> learnosetNavItems, List<NavItemsGroup> navItemsGroups, int iconsColor, LearnosetNavigationBar.NavThemes selectedNavTheme, int selectedItemBackgroundColor, NavigationEventListener navigationEventListener, int navItemsTxtColor, int navGroupTxtColor, int selectedItemIconColor, int selectedItemTextColor) {
 
         this.drawerLayout = null;
         this.selectedNavTheme = selectedNavTheme;
@@ -48,6 +50,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         this.iconsColor = iconsColor;
         this.navItemsTxtColor = navItemsTxtColor;
         this.selectedItemBackgroundColor = selectedItemBackgroundColor;
+        this.selectedItemIconColor = selectedItemIconColor;
+        this.selectedItemTextColor = selectedItemTextColor;
     }
 
     public void setDrawerLayout(DrawerLayout drawerLayout) {
@@ -81,8 +85,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
             LearnosetNavigationBar.selectedItemPosition = position;
 
             holder.navItemLayout.setBackground(createRoundBackground());
-            DrawableCompat.setTint(holder.navItemIcon.getDrawable(), Color.parseColor("#FFFFFF"));
-            holder.navItemTitle.setTextColor(Color.WHITE);
+            DrawableCompat.setTint(holder.navItemIcon.getDrawable(), selectedItemIconColor);
+            holder.navItemTitle.setTextColor(selectedItemTextColor);
 
             if (learnosetNavItem.getFragment() != null) {
                 FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
@@ -95,9 +99,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         } else {
             holder.navItemLayout.setBackgroundColor(Color.TRANSPARENT);
             DrawableCompat.setTint(holder.navItemIcon.getDrawable(), iconsColor);
-
             holder.navItemTitle.setTextColor(navItemsTxtColor);
-
         }
 
         if (learnosetNavItem.groupId != -1 && !checkGroupAdded(learnosetNavItem.groupId)) {

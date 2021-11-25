@@ -48,6 +48,8 @@ public class LearnosetNavigationBar extends NavigationView {
     private int navItemTxtColor;
     private int navGroupTxtColor;
     private int selectedItemBackgroundColor;
+    private int selectedItemTextColor;
+    private int selectedItemIconColor;
     private ImageView headerImage;
     private TextView profileName;
     private NavigationAdapter navigationAdapter;
@@ -137,6 +139,14 @@ public class LearnosetNavigationBar extends NavigationView {
             selectedItemBackgroundColor = customNavigationTheme.getSelectedItemBackgroundColor();
         }
 
+        if(customNavigationTheme.getSelectedItemIconColor() != 0){
+            selectedItemIconColor = customNavigationTheme.getSelectedItemIconColor();
+        }
+
+        if(customNavigationTheme.getSelectedItemTextColor() != 0){
+            selectedItemTextColor = customNavigationTheme.getSelectedItemTextColor();
+        }
+
         navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
     }
 
@@ -147,11 +157,15 @@ public class LearnosetNavigationBar extends NavigationView {
             navItemTxtColor = Color.parseColor("#E6FFFFFF");
             navGroupTxtColor = Color.parseColor("#66FFFFFF");
             selectedItemBackgroundColor = Color.parseColor("#4C74FA");
+            selectedItemIconColor = Color.WHITE;
+            selectedItemTextColor = Color.WHITE;
         } else {
             iconsColor = Color.parseColor("#99000000");
             navItemTxtColor = Color.parseColor("#99000000");
             selectedItemBackgroundColor = Color.parseColor("#4C74FA");
             navGroupTxtColor = Color.parseColor("#66000000");
+            selectedItemIconColor = Color.WHITE;
+            selectedItemTextColor = Color.WHITE;
         }
     }
 
