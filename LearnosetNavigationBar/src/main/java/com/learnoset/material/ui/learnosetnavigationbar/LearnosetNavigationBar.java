@@ -519,6 +519,13 @@ public class LearnosetNavigationBar extends NavigationView {
         navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, iconsColor, selectedTheme, selectedItemBackgroundColor, navigationEventListener, navItemTxtColor, navGroupTxtColor);
         navItemsRecyclerView.setAdapter(navigationAdapter);
 
+        navLogOutLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigationEventListener.onLogOutBtnClick();
+            }
+        });
+
         navigationEventListener = null;
     }
 
