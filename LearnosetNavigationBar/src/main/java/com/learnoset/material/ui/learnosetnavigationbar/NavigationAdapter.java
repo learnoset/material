@@ -116,7 +116,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
             learnosetNavItems.get(LearnosetNavigationBar.selectedItemPosition).setSelected(false);
             learnosetNavItems.get(position).setSelected(true);
 
-            reloadNavigationBar(iconsColor, selectedNavTheme, selectedItemBackgroundColor, navItemsTxtColor, navGroupTxtColor);
+            reloadNavigationBar(iconsColor, selectedNavTheme, selectedItemBackgroundColor, navItemsTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
 
             if (navigationEventListener != null) {
                 navigationEventListener.onItemSelected(position, learnosetNavItem);
@@ -150,12 +150,14 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         return isGroupAdded;
     }
 
-    public void reloadNavigationBar(int iconsColor, LearnosetNavigationBar.NavThemes selectedNavTheme, int selectedItemBackgroundColor, int navItemsTxtColor, int navGroupTxtColor) {
+    public void reloadNavigationBar(int iconsColor, LearnosetNavigationBar.NavThemes selectedNavTheme, int selectedItemBackgroundColor, int navItemsTxtColor, int navGroupTxtColor, int selectedItemTextColor, int selectedItemIconColor) {
         this.iconsColor = iconsColor;
         this.selectedNavTheme = selectedNavTheme;
         this.selectedItemBackgroundColor = selectedItemBackgroundColor;
         this.navItemsTxtColor = navItemsTxtColor;
         this.navGroupTxtColor = navGroupTxtColor;
+        this.selectedItemIconColor = selectedItemIconColor;
+        this.selectedItemTextColor = selectedItemTextColor;
 
         groupIds.clear();
         notifyDataSetChanged();

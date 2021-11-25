@@ -82,7 +82,7 @@ public class LearnosetNavigationBar extends NavigationView {
         learnosetNavItems.get(LearnosetNavigationBar.selectedItemPosition).setSelected(false);
         learnosetNavItems.get(navItemPosition).setSelected(true);
 
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void setDrawerLayout(DrawerLayout drawerLayout, DrawerGravity drawerGravity) {
@@ -110,7 +110,7 @@ public class LearnosetNavigationBar extends NavigationView {
         }
 
         gettingSelectedThemeDetails();
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void setTheme(CustomNavTheme customNavigationTheme) {
@@ -147,7 +147,7 @@ public class LearnosetNavigationBar extends NavigationView {
             selectedItemTextColor = customNavigationTheme.getSelectedItemTextColor();
         }
 
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     private void gettingSelectedThemeDetails() {
@@ -217,7 +217,7 @@ public class LearnosetNavigationBar extends NavigationView {
             this.iconsColor = Color.parseColor(getNavColorValue(iconsColor));
         }
 
-        navigationAdapter.reloadNavigationBar(this.iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(this.iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void setSelectedItemBackground(NavColors selectedItemBackgroundColor) {
@@ -227,7 +227,7 @@ public class LearnosetNavigationBar extends NavigationView {
             this.selectedItemBackgroundColor = Color.parseColor(getNavColorValue(selectedItemBackgroundColor));
         }
 
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, this.selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, this.selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void setHeaderData(String profileNameTxt) {
@@ -358,7 +358,7 @@ public class LearnosetNavigationBar extends NavigationView {
         }
 
         learnosetNavItems.add(learnosetNavItem);
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void addNavItem(LearnosetNavItem.BuiltInItems builtInItems, Fragment fragment, int fragmentContainerResId) {
@@ -436,12 +436,12 @@ public class LearnosetNavigationBar extends NavigationView {
         }
 
         learnosetNavItems.add(learnosetNavItem);
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void addNavItem(LearnosetNavItem learnosetNavItem) {
         learnosetNavItems.add(learnosetNavItem);
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void addNavItems(List<LearnosetNavItem> learnosetNavItem) {
@@ -451,7 +451,7 @@ public class LearnosetNavigationBar extends NavigationView {
         }
 
         learnosetNavItems.addAll(learnosetNavItem);
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void addItemsGroup(NavItemsGroup navItemsGroup) {
@@ -462,12 +462,12 @@ public class LearnosetNavigationBar extends NavigationView {
 
         navItemsGroups.add(navItemsGroup);
         learnosetNavItems.addAll(navItemsGroup.getGroupItems());
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void removeItem(int itemPosition) {
         learnosetNavItems.remove(itemPosition);
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     public void setBackgroundColor(int color) {
@@ -499,7 +499,7 @@ public class LearnosetNavigationBar extends NavigationView {
             }
         }
 
-        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter.reloadNavigationBar(iconsColor, selectedTheme, selectedItemBackgroundColor, navItemTxtColor, navGroupTxtColor, selectedItemTextColor, selectedItemIconColor);
     }
 
     @SuppressLint("InflateParams")
@@ -527,7 +527,7 @@ public class LearnosetNavigationBar extends NavigationView {
         navItemsRecyclerView.setHasFixedSize(true);
         navItemsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, iconsColor, selectedTheme, selectedItemBackgroundColor, navigationEventListener, navItemTxtColor, navGroupTxtColor);
+        navigationAdapter = new NavigationAdapter(context, learnosetNavItems, navItemsGroups, iconsColor, selectedTheme, selectedItemBackgroundColor, navigationEventListener, navItemTxtColor, navGroupTxtColor, selectedItemIconColor, selectedItemTextColor);
         navItemsRecyclerView.setAdapter(navigationAdapter);
 
         navLogOutLayout.setOnClickListener(new OnClickListener() {
