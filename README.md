@@ -169,6 +169,8 @@ CustomNavTheme customNavTheme = new CustomNavTheme();
 customNavTheme.setIconsColor(Color.parseColor("#FF03DAC5"));
 customNavTheme.setNavigationBackground(Color.BLACK);
 customNavTheme.setSelectedItemBackgroundColor(Color.parseColor("#FF03DAC5"));
+customNavTheme.setSelectedItemIconColor(Color.ORANGE);
+customNavTheme.setSelectedItemTextColor(Color.YELLOW);
 customNavTheme.setTextColor(Color.WHITE);
 
 learnosetNavigationBar.setTheme(customNavTheme);
