@@ -37,7 +37,7 @@ Learnoset Material UI is a powerful library for Android Studio that consist of
 1. Add below line in your module level build.gradle file
 
 ```groovy
-implementation 'com.github.learnoset:material.ui:2.21.3'
+implementation 'com.github.learnoset:material.ui:2.22'
 ```
 
 <br>
