@@ -38,11 +38,13 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
     private int selectedItemTextColor;
     private int textSize;
     private Thread thread;
+    private BottomBarEventListener bottomBarEventListener;
 
     public LearnosetBottomBar(Context context) {
         super(context);
         this.context = context;
         this.thread = null;
+        bottomBarEventListener = null;
         init();
     }
 
@@ -50,6 +52,7 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
         super(context, attrs);
         this.context = context;
         this.thread = null;
+        bottomBarEventListener = null;
         init();
     }
 
@@ -70,6 +73,10 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
         }
 
         selectedItem = 0;
+    }
+
+    public void setEventListener(BottomBarEventListener bottomBarEventListener) {
+        this.bottomBarEventListener = bottomBarEventListener;
     }
 
     public void setTheme(BottomBarTheme setTheme) {
@@ -267,7 +274,7 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
         return textView;
     }
 
-    public void removeShadow(){
+    public void removeShadow() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setElevation(0);
         }
@@ -383,6 +390,10 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
                     .setReorderingAllowed(true)
                     .addToBackStack(null)
                     .commit();
+        }
+
+        if (bottomBarEventListener != null) {
+            bottomBarEventListener.onItemSelected(bottomBarItems.get(selectedItem), selectedItem);
         }
 
     }
