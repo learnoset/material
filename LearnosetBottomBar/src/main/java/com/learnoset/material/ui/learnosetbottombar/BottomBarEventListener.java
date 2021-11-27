@@ -1,4 +1,4 @@
-package com.learnoset.learnosetbottombar;
+package com.learnoset.material.ui.learnosetbottombar;
 
 public abstract class BottomBarEventListener {
 

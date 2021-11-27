@@ -1,4 +1,4 @@
-package com.learnoset.learnosetbottombar;
+package com.learnoset.material.ui.learnosetbottombar;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.learnoset.learnosetbottombar.R;
 
 import java.util.ArrayList;
 import java.util.List;
