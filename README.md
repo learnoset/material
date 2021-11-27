@@ -1,6 +1,9 @@
 
 # Best Material UI design Library for Android Studio
 
+![](https://learnoset.com/GitHubImages/custom-navigation-drawer-in-android-studio.png)
+
+
 Learnoset Material UI is a powerful library for Android Studio that consist of
 <ul>
 <a href = "#navigation_bar"><li>Custom Navigation Drawer</li></a>
@@ -37,7 +40,7 @@ Learnoset Material UI is a powerful library for Android Studio that consist of
 1. Add below line in your module level build.gradle file
 
 ```groovy
-implementation 'com.github.learnoset:material.ui:2.26'
+implementation 'com.github.learnoset:material.ui:2.28'
 ```
 
 <br>
