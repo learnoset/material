@@ -7,7 +7,7 @@
 Learnoset Material UI is a powerful library for Android Studio that consist of
 <ul>
 <a href = "#navigation_bar"><li>Custom Navigation Drawer</li></a>
-<li>Material Bottom Bar</li>
+ <a href = "#bottom_bar"><li>Material Bottom Bar</li></a>
 <li>Material Custom Dialogs</li>
 <li>Material Progress Bars</li>
 <li>Material Tab Layout</li>
@@ -36,7 +36,7 @@ Learnoset Material UI is a powerful library for Android Studio that consist of
  </li> 
 </ul>
 <br><br>
-<h3 id = "navigation_bar">How to use Custom Navigation Drawer in Android Studio</h3>
+<h3>How to add Learnoset Material UI library to your Project?</h3>
 1. Add below line in your module level build.gradle file
 
 ```groovy
@@ -61,8 +61,11 @@ allprojects {
 
 <br>
 
+<h3 id = "navigation_bar">How to use Custom Navigation Drawer in Android Studio</h3>
 
-3. Add below code in the XML file
+<br>
+
+1. Add below code in the XML file
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -96,7 +99,7 @@ allprojects {
 
 <br>
 
-4. Using Built-In Items in the Navigation Bar
+2. Using Built-In Items in the Navigation Bar
 
 ```java
 final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
@@ -122,7 +125,7 @@ openNavigationBtn.setOnClickListener(new View.OnClickListener() {
 
 <br>
 
-5. Using your own custom Item Names and Icons
+3. Using your own custom Item Names and Icons
 
 ```java
 // You can use Custom Items
@@ -139,7 +142,7 @@ learnosetNavigationBar.addNavItem(customItem2);
 
 <br>
 
-6. Creating Group of Items
+4. Creating Group of Items
 
 ```java
 // CREATING GROUP OF ITEMS
@@ -161,7 +164,7 @@ learnosetNavigationBar.addItemsGroup(navItemsGroup);
 
 <br>
 
-7. Using Navigation Themes
+5. Using Navigation Themes
 ```java
 learnosetNavigationBar.setTheme(LearnosetNavigationBar.NavThemes.DARK);
 // OR
@@ -182,7 +185,7 @@ learnosetNavigationBar.setTheme(customNavTheme);
 
 <br>
 
-8. Add Event Listener
+6. Add Event Listener
 ```java
 learnosetNavigationBar.setEventListener(new NavigationEventListener() {
     @Override
@@ -194,21 +197,21 @@ learnosetNavigationBar.setEventListener(new NavigationEventListener() {
 
 <br>
 
-9. Change Selected Item Background Color
+7. Change Selected Item Background Color
 ```java
 learnosetNavigationBar.setSelectedItemBackground(LearnosetNavigationBar.NavColors.ORANGE);
 ```
 
 <br>
 
-10. Change Icons Color
+8. Change Icons Color
 ```java
 learnosetNavigationBar.setIconsColor(LearnosetNavigationBar.NavColors.RED);
 ```
 
 <br>
 
-11. Setting Header Data (Profile Name & Profile Picture)
+9. Setting Header Data (Profile Name & Profile Picture)
 ```java
 // setting header profile name and profile image (from resources)
 learnosetNavigationBar.setHeaderData("John Corner", R.drawable.profile_image);
@@ -227,14 +230,61 @@ learnosetNavigationBar.setHeaderData("John Corner", "url of image");
 
 <br>
 
-12. Hide Log Out Button
+10. Hide Log Out Button
 ```java
 learnosetNavigationBar.enableLogOutBtn(false);
 ```
 
 <br>
 
-You can Visit our Website to learn more about Android App Development<br>
+<h3 id = "bottom_bar">How to use Custom Bottom Bar in Android Studio</h3>
+
+<br>
+
+1. Add below code in your XML file
+```xml
+<com.learnoset.learnosettestproject.LearnosetBottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true" />
+```
+
+<br>
+
+2. Add below code in your Activity.class file
+```java
+final LearnosetBottomBar bottomBar = findViewById(R.id.bottomBar);
+
+// adding Items to the bottom bar (You can also use Built-In Items and Icons)
+bottomBar.addItem(BottomBarItem.BuiltInItems.HOME);
+bottomBar.addItem(BottomBarItem.BuiltInItems.MESSAGE);
+bottomBar.addItem(BottomBarItem.BuiltInItems.SETTINGS);
+bottomBar.addItem(BottomBarItem.BuiltInItems.PROFILE);
+
+// OR you can also add custom Item with your own Text and Icon
+bottomBar.addItem(new BottomBarItem("Custom Item 1", R.drawable.custom_icon));
+```
+
+<br>
+
+3. Using themes with Bottom Bar
+```java
+bottomBar.setTheme(LearnosetBottomBar.BottomBarTheme.LIGHT);
+// OR
+bottomBar.setTheme(LearnosetBottomBar.BottomBarTheme.DARK);
+// OR
+CustomNavTheme customNavTheme = new CustomNavTheme(); // creating custom theme object
+customNavTheme.setBackgroundColor(Color.BLACK); // set background color for bottom bar
+customNavTheme.setSelectedItemBackgroundColor(LearnosetBottomBar.LearnosetColors.ORANGE); // setting selected item background color
+customNavTheme.setIconsColor(LearnosetBottomBar.LearnosetColors.ORANGE); // setting icons color
+customNavTheme.setSelectedItemTextColor(Color.WHITE); // setting text color
+
+bottomBar.setTheme(LearnosetBottomBar.BottomBarTheme.LIGHT); // setting custom theme to the bottom bar
+// new bottom bar animations are coming soon.
+```
+
+You can Visit our Website to learn more about Android App Development, Java, Python, JavaScript, Artificial Intelligence<br>
 [Learnoset Website](https://learnoset.com/)
 
 <br>
