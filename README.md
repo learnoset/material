@@ -243,7 +243,7 @@ learnosetNavigationBar.enableLogOutBtn(false);
 
 1. Add below code in your XML file
 ```xml
-<com.learnoset.learnosettestproject.LearnosetBottomBar
+<com.learnoset.material.ui.learnosetbottombar.LearnosetBottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
