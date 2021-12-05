@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 
 public class BottomBarItem {
 
+
     public LinearLayout rootLayout;
     public ImageView icon;
     public TextView titleTextView;
@@ -15,6 +16,7 @@ public class BottomBarItem {
     private int iconResourceId;
     private Fragment fragment;
     private int fragmentContainer;
+
 
     public BottomBarItem() {
         rootLayout = null;

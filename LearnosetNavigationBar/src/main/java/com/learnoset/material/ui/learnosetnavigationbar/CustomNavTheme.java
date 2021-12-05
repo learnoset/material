@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 public class CustomNavTheme {
 
+
     private int textColor;
     private int iconsColor;
     private int navigationBackground;
@@ -12,6 +13,7 @@ public class CustomNavTheme {
     private int selectedItemTextColor;
     private int selectedItemIconColor;
 
+    
     public CustomNavTheme() {
         textColor = 0;
         iconsColor = 0;
