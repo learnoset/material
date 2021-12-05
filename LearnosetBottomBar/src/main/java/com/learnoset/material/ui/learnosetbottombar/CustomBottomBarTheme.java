@@ -2,7 +2,7 @@ package com.learnoset.material.ui.learnosetbottombar;
 
 import android.graphics.Color;
 
-public class CustomNavTheme {
+public class CustomBottomBarTheme {
 
     private int iconsColor;
     private int backgroundColor;
@@ -10,14 +10,14 @@ public class CustomNavTheme {
     private int selectedItemTextColor;
     private int selectedItemIconColor;
 
-    public CustomNavTheme() {
+    public CustomBottomBarTheme() {
         iconsColor = 0;
         selectedItemBackgroundColor = 0;
         selectedItemTextColor = 0;
         selectedItemIconColor = 0;
     }
 
-    public CustomNavTheme(int iconsColor, int backgroundColor, int selectedItemBackgroundColor, int selectedItemTextColor, int selectedItemIconColor) {
+    public CustomBottomBarTheme(int iconsColor, int backgroundColor, int selectedItemBackgroundColor, int selectedItemTextColor, int selectedItemIconColor) {
         this.iconsColor = iconsColor;
         this.backgroundColor = backgroundColor;
         this.selectedItemBackgroundColor = selectedItemBackgroundColor;

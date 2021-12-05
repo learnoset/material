@@ -13,7 +13,7 @@ public class CustomNavTheme {
     private int selectedItemTextColor;
     private int selectedItemIconColor;
 
-    
+
     public CustomNavTheme() {
         textColor = 0;
         iconsColor = 0;

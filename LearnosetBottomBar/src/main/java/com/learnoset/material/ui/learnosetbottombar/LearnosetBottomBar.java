@@ -87,7 +87,7 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
         refreshBottomBar();
     }
 
-    public void setTheme(CustomNavTheme setCustomTheme) {
+    public void setTheme(CustomBottomBarTheme setCustomTheme) {
 
         if (setCustomTheme.getSelectedItemBackgroundColor() != 0) {
             selectedItemBackgroundColor = setCustomTheme.getSelectedItemBackgroundColor();
