@@ -287,6 +287,7 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
         }
     }
 
+    
     private void refreshBottomBar() {
 
         setBackgroundColor(bottomBarBackgroundColor);
@@ -299,6 +300,14 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
                 bottomBarItems.get(i).titleTextView.setVisibility(View.VISIBLE);
                 bottomBarItems.get(i).rootLayout.setBackground(creatingRoundBackground(selectedItemBackgroundColor));
 
+                if (bottomBarItems.get(i).getFragment() != null) {
+                    FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(bottomBarItems.get(i).getFragmentContainer(), bottomBarItems.get(i).getFragment(), null)
+                            .setReorderingAllowed(true)
+                            .addToBackStack(null)
+                            .commit();
+                }
             } else {
                 DrawableCompat.setTint(bottomBarItems.get(i).icon.getDrawable(), iconsColor);
                 bottomBarItems.get(i).titleTextView.setVisibility(View.GONE);
