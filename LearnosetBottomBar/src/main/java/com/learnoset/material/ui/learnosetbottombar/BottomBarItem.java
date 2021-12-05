@@ -68,8 +68,9 @@ public class BottomBarItem {
         return fragment;
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment, int fragmentContainer) {
         this.fragment = fragment;
+        this.fragmentContainer = fragmentContainer;
     }
 
     public int getFragmentContainer() {

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -190,6 +191,79 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
             bottomBarItem1.setIcon(R.drawable.profile_icon);
         }
 
+        bottomBarItems.add(bottomBarItem1);
+        addingNewItem(bottomBarItem1.getTitle(), bottomBarItem1.getIcon());
+    }
+
+    public void addItem(BottomBarItem.BuiltInItems bottomBarItem, Fragment fragment, int fragmentContainer) {
+
+        BottomBarItem bottomBarItem1 = new BottomBarItem();
+
+        if (bottomBarItem == BottomBarItem.BuiltInItems.DASHBOARD) {
+            bottomBarItem1.setTitle("Dashboard");
+            bottomBarItem1.setIcon(R.drawable.dashboard_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.HOME) {
+            bottomBarItem1.setTitle("Home");
+            bottomBarItem1.setIcon(R.drawable.home_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.SEND) {
+            bottomBarItem1.setTitle("Send");
+            bottomBarItem1.setIcon(R.drawable.send_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.SETTINGS) {
+            bottomBarItem1.setTitle("Settings");
+            bottomBarItem1.setIcon(R.drawable.settings_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.ABOUT_US) {
+            bottomBarItem1.setTitle("About Us");
+            bottomBarItem1.setIcon(R.drawable.about_us_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.CONTACT_US) {
+            bottomBarItem1.setTitle("Contact Us");
+            bottomBarItem1.setIcon(R.drawable.contact_us_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.DOWNLOAD) {
+            bottomBarItem1.setTitle("Downloads");
+            bottomBarItem1.setIcon(R.drawable.download_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.EMAIL) {
+            bottomBarItem1.setTitle("Email");
+            bottomBarItem1.setIcon(R.drawable.email_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.FAVOURITES) {
+            bottomBarItem1.setTitle("Favourites");
+            bottomBarItem1.setIcon(R.drawable.favourite_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.GALLERY) {
+            bottomBarItem1.setTitle("Gallery");
+            bottomBarItem1.setIcon(R.drawable.gallery_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.HELP) {
+            bottomBarItem1.setTitle("Help");
+            bottomBarItem1.setIcon(R.drawable.help_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.MESSAGE) {
+            bottomBarItem1.setTitle("Message");
+            bottomBarItem1.setIcon(R.drawable.message_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.FEEDBACK) {
+            bottomBarItem1.setTitle("Feedback");
+            bottomBarItem1.setIcon(R.drawable.feedback_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.PRIVACY_POLICY) {
+            bottomBarItem1.setTitle("Privacy Policy");
+            bottomBarItem1.setIcon(R.drawable.privacy_policy_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.RATE_US) {
+            bottomBarItem1.setTitle("Rate Us");
+            bottomBarItem1.setIcon(R.drawable.rate_us_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.UPLOAD) {
+            bottomBarItem1.setTitle("Upload");
+            bottomBarItem1.setIcon(R.drawable.upload_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.TOOLS) {
+            bottomBarItem1.setTitle("Tools");
+            bottomBarItem1.setIcon(R.drawable.tools_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.SEARCH) {
+            bottomBarItem1.setTitle("Search");
+            bottomBarItem1.setIcon(R.drawable.search_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.SHARE) {
+            bottomBarItem1.setTitle("Share");
+            bottomBarItem1.setIcon(R.drawable.share_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.TRASH) {
+            bottomBarItem1.setTitle("Trash");
+            bottomBarItem1.setIcon(R.drawable.trash_icon);
+        } else if (bottomBarItem == BottomBarItem.BuiltInItems.PROFILE) {
+            bottomBarItem1.setTitle("Profile");
+            bottomBarItem1.setIcon(R.drawable.profile_icon);
+        }
+        bottomBarItem1.setFragment(fragment, fragmentContainer);
         bottomBarItems.add(bottomBarItem1);
         addingNewItem(bottomBarItem1.getTitle(), bottomBarItem1.getIcon());
     }
