@@ -41,6 +41,8 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
     private int selectedItemTextColor;
     private int textSize;
     private Thread thread;
+    private boolean animationEnabled = true;
+
     private BottomBarEventListener bottomBarEventListener;
 
     public LearnosetBottomBar(Context context) {
@@ -287,7 +289,10 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
         }
     }
 
-    
+    public void enableAnimation(boolean enableAnimation){
+        this.animationEnabled = enableAnimation;
+    }
+
     private void refreshBottomBar() {
 
         setBackgroundColor(bottomBarBackgroundColor);
@@ -455,7 +460,7 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
             getTextViewWidth = getTextViewWidth - 80;
         }
 
-        if (getTextViewWidth > 10) {
+        if (getTextViewWidth > 10 && animationEnabled) {
             ValueAnimator animation = ValueAnimator.ofInt(0, getTextViewWidth);
             animation.setDuration(200);
             animation.start();
