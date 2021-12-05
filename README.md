@@ -274,13 +274,13 @@ bottomBar.setTheme(LearnosetBottomBar.BottomBarTheme.LIGHT);
 // OR
 bottomBar.setTheme(LearnosetBottomBar.BottomBarTheme.DARK);
 // OR
-CustomNavTheme customNavTheme = new CustomNavTheme(); // creating custom theme object
-customNavTheme.setBackgroundColor(Color.BLACK); // set background color for bottom bar
-customNavTheme.setSelectedItemBackgroundColor(LearnosetBottomBar.LearnosetColors.ORANGE); // setting selected item background color
-customNavTheme.setIconsColor(LearnosetBottomBar.LearnosetColors.ORANGE); // setting icons color
-customNavTheme.setSelectedItemTextColor(Color.WHITE); // setting text color
+CustomBottomBarTheme customBottomBarTheme = new CustomBottomBarTheme(); // creating custom theme object
+customBottomBarTheme.setBackgroundColor(Color.BLACK); // set background color for bottom bar
+customBottomBarTheme.setSelectedItemBackgroundColor(LearnosetBottomBar.LearnosetColors.ORANGE); // setting selected item background color
+customBottomBarTheme.setIconsColor(LearnosetBottomBar.LearnosetColors.ORANGE); // setting icons color
+customBottomBarTheme.setSelectedItemTextColor(Color.WHITE); // setting text color
 
-bottomBar.setTheme(LearnosetBottomBar.BottomBarTheme.LIGHT); // setting custom theme to the bottom bar
+bottomBar.setTheme(customBottomBarTheme); // setting custom theme to the bottom bar
 // new bottom bar animations are coming soon.
 ```
 
