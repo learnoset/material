@@ -207,6 +207,7 @@ public class LearnosetNavigationBar extends NavigationView {
 
     public void setEventListener(NavigationEventListener navigationEventListener) {
         this.navigationEventListener = navigationEventListener;
+        navigationAdapter.setNavigationEventListener(this.navigationEventListener);
     }
 
     public void setIconsColor(NavColors iconsColor) {

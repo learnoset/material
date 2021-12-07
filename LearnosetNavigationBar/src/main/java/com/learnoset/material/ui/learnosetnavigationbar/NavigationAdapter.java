@@ -27,7 +27,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     private final List<LearnosetNavItem> learnosetNavItems;
     private final List<NavItemsGroup> navItemsGroups;
     private final Context context;
-    private final NavigationEventListener navigationEventListener;
+    private NavigationEventListener navigationEventListener;
     private final List<Integer> groupIds = new ArrayList<>();
     private int iconsColor;
     private int navItemsTxtColor;
@@ -60,6 +60,10 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
     public void addNewItem(LearnosetNavItem learnosetNavItem) {
         learnosetNavItems.add(learnosetNavItem);
+    }
+
+    public void setNavigationEventListener(NavigationEventListener navigationEventListener){
+        this.navigationEventListener = navigationEventListener;
     }
 
     public void removeItem(int position) {
