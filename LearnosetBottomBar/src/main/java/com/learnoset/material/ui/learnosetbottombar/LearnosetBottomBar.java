@@ -84,6 +84,11 @@ public class LearnosetBottomBar extends LinearLayout implements View.OnClickList
         this.bottomBarEventListener = bottomBarEventListener;
     }
 
+    public void setSelected(int position){
+        selectedItem = position;
+        refreshBottomBar();
+    }
+
     public void setTheme(BottomBarTheme setTheme) {
         bottomBarTheme = setTheme;
         gettingThemeValues();
