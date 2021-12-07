@@ -284,6 +284,19 @@ bottomBar.setTheme(customBottomBarTheme); // setting custom theme to the bottom 
 // new bottom bar animations are coming soon.
 ```
 
+<br>
+
+4. Bottom Bar Animation
+```java
+// enable animation
+bottomBar.enableAnimation(true);
+// OR
+// disable animation
+bottomBar.enableAnimation(false);
+
+// new bottom bar animations are coming soon.
+```
+
 You can Visit our Website to learn more about Android App Development, Java, Python, JavaScript, Artificial Intelligence<br>
 [Learnoset Website](https://learnoset.com/)
 
